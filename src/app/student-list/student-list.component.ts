@@ -13,13 +13,14 @@ export class StudentListComponent implements OnInit {
   constructor(private studentService: StudentService) { }
 
   ngOnInit(): void {
-    this.getAllStudents();
+    this.fetchStudents();
   }
 
-  getAllStudents(): void {
+  fetchStudents(): void {
     this.studentService.getAllStudents().subscribe(
-      (students) => {
+      (students: Student[]) => {
         this.students = students;
+        console.log('Student List:', this.students);
       },
       (error) => {
         console.error('Error fetching students:', error);
