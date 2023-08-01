@@ -5,13 +5,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { StudentListComponent } from './student-list/student-list.component';
+import { EditStudentsComponent } from './edit-students/edit-students.component'
+import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from '@angular/router';
 
 //import { StudentListComponent } from './student-list/student-list.component';
 //import { StudentFormComponent } from './student-form/student-form.component';
 
 @NgModule({
-  declarations: [AppComponent, StudentListComponent],
-  imports: [BrowserModule, HttpClientModule, FormsModule, ReactiveFormsModule],
+  declarations: [AppComponent, StudentListComponent,EditStudentsComponent],
+  imports: [BrowserModule, HttpClientModule, FormsModule, ReactiveFormsModule,BrowserModule,
+    AppRoutingModule, // Make sure your AppRoutingModule or equivalent is imported here
+    RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })

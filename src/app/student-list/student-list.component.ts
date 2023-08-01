@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../models/student.model';
 import { StudentService } from '../service/student.service';
+import { single } from 'rxjs';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-student-list',
@@ -10,10 +13,26 @@ import { StudentService } from '../service/student.service';
 export class StudentListComponent implements OnInit {
   students: Student[] = [];
 
-  constructor(private studentService: StudentService) { }
+  constructor(private studentService: StudentService,private router: Router) { }
 
   ngOnInit(): void {
     this.fetchStudents();
+    
+  }
+
+  goToEditPage(roll_no:any) {
+   this.router.navigateByUrl("/edit")
+   roll_no=roll_no.toString()
+   alert(this.studentService.getOneStudent(roll_no))
+  }
+
+
+  fetchOne(roll_no:any):void{
+    this.studentService.getOneStudent(roll_no).subscribe(
+      (responce)=>{
+        console.log(responce)
+      }
+    )
   }
 
   fetchStudents(): void {
@@ -27,4 +46,15 @@ export class StudentListComponent implements OnInit {
       }
     );
   }
+  deleted(roll_no:any):void{
+    this.studentService.deleteOneStudent(roll_no).subscribe(
+      (responce)=>{
+        console.log(responce)
+      },
+      (error)=>{
+        alert("Error while get deleted")
+      }
+    )
+  }
+ 
 }

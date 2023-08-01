@@ -1,1 +1,39 @@
-<p>student-list works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Info</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div *ngIf="students.length>0">
+        <table class="table table-bordered">
+            <tr>
+                <th></th>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Class</th>
+                <th>Section_</th>
+                <th>Class Teacher</th> 
+            </tr>
+            <tr *ngFor="let student of students">
+                    <input  type="checkbox">
+                    <td >{{student.roll_no}}</td>
+                    <td>{{student.name}}</td>
+                    <td>{{student.age}}</td>
+                    <td>{{student.class}}</td> 
+                    <td>{{student.sec}}</td>
+                    <td>{{student.class_teacher}}</td>
+                    <div>
+                        <button type="button" class="btn btn-outline-dark" (click)="goToEditPage(student.roll_no)"> Edit</button>
+                        <button type="button" class="btn btn-danger" (click)="fetchOne(student.roll_no)" (click)="deleted(student.roll_no)"> Delete</button>
+                    </div>
+                    
+            </tr>
+        </table>
+    </div>
+    <div *ngIf="students.length<=0">No Data</div>
+</body>
+</html>
