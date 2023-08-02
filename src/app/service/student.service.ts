@@ -25,8 +25,9 @@ export class StudentService {
     const url = `${this.apiUrl}/get_one/${roll_no}`
     return this.http.get<any>(url)
   }
+
   addStudent(studentData: Student): Observable<Student> {
-    studentData.roll_no = +studentData.roll_no;
+    //studentData.roll_no = studentData.roll_no;
     return this.http.post<Student>(`${this.apiUrl}/add`, studentData);
   }
 }

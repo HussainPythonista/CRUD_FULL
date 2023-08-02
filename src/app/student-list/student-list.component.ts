@@ -23,16 +23,12 @@ export class StudentListComponent implements OnInit {
   goToEditPage(roll_no:any) {
    this.router.navigateByUrl("/edit")
    roll_no=roll_no.toString()
-   alert(this.studentService.getOneStudent(roll_no))
+   return this.studentService.getOneStudent(roll_no)
   }
 
 
   fetchOne(roll_no:any):void{
-    this.studentService.getOneStudent(roll_no).subscribe(
-      (responce)=>{
-        console.log(responce)
-      }
-    )
+    console.log(roll_no)
   }
 
   fetchStudents(): void {

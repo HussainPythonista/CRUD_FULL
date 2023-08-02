@@ -27,7 +27,7 @@
                     <td>{{student.sec}}</td>
                     <td>{{student.class_teacher}}</td>
                     <div>
-                        <button type="button" class="btn btn-outline-dark" (click)="goToEditPage(student.roll_no)"> Edit</button>
+                        <button type="button" class="btn btn-outline-dark" (click)="fetchOne(student.roll_no)"> Edit</button>
                         <button type="button" class="btn btn-danger" (click)="fetchOne(student.roll_no)" (click)="deleted(student.roll_no)"> Delete</button>
                     </div>
                     

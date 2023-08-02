@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+  
     <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="roll_no">Roll No:</label>
@@ -35,7 +36,7 @@
             <label for="class_teacher">Class Teacher:</label>
             <input type="text" formControlName="class_teacher" id="class_teacher" class="form-control" required>
         </div>
-        <button type="submit" (click)="onSubmit()" class="btn btn-primary">Submit</button>
+        <button type="submit"  class="btn btn-primary">Submit</button>
     </form>
       
 </body>
