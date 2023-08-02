@@ -45,7 +45,7 @@ export class StudentListComponent implements OnInit {
   deleted(roll_no:any):void{
     this.studentService.deleteOneStudent(roll_no).subscribe(
       (responce)=>{
-        console.log(responce)
+        this.fetchStudents()
       },
       (error)=>{
         alert("Error while get deleted")
