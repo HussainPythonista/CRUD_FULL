@@ -8,8 +8,12 @@ import { Student } from '../models/student.model';
 })
 export class StudentService {
   private apiUrl = 'http://127.0.0.1:5500'; // Replace with your Flask API URL
+  public data_to_pass: any;
 
-  constructor(private http: HttpClient) { }
+  public edit:boolean=false
+  constructor(private http: HttpClient) {
+    
+   }
 
   // Fetch all students from the Flask API
   getAllStudents(): Observable<Student[]> {
@@ -21,6 +25,7 @@ export class StudentService {
     return this.http.delete<any>(url)
     
   }
+
   getOneStudent(roll_no:number):Observable<Student>{
     const url = `${this.apiUrl}/get_one/${roll_no}`
     return this.http.get<any>(url)
@@ -30,4 +35,10 @@ export class StudentService {
     //studentData.roll_no = studentData.roll_no;
     return this.http.post<Student>(`${this.apiUrl}/add`, studentData);
   }
+
+  stu_info_edit(data:any){
+    this.edit=true
+    this.data_to_pass=data
+  }
+
 }

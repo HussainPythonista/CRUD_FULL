@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Student } from '../models/student.model';
 import { StudentService } from '../service/student.service';
 import { single } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router,NavigationExtras  } from '@angular/router';
 
 
 @Component({
@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 })
 export class StudentListComponent implements OnInit {
   students: Student[] = [];
+  data_edit:any;
+ 
+  edit:boolean=false
 
   constructor(private studentService: StudentService,private router: Router) { }
 
@@ -20,10 +23,35 @@ export class StudentListComponent implements OnInit {
     
   }
 
-  goToEditPage(roll_no:any) {
-   this.router.navigateByUrl("/edit")
-   roll_no=roll_no.toString()
-   return this.studentService.getOneStudent(roll_no)
+  navigateToEditPageWithData() {
+    const data = {
+      age: 25,
+      name: 'John Doe',
+      subject: 'Mathematics'
+    };
+  
+    const navigationExtras: NavigationExtras = {
+      state: data
+    };
+  
+    this.router.navigateByUrl('/edit', navigationExtras);
+  }
+
+  student_edit(roll_no:any){
+      //this.router.navigateByUrl("/edit")
+      this.studentService.edit=true
+      this.studentService.getOneStudent(roll_no).subscribe(
+        (response)=>{
+          this.data_edit=(response)
+          this.studentService.stu_info_edit(this.data_edit)
+          console.log(this.studentService.data_to_pass)
+          this.router.navigateByUrl("/edit")
+        },
+        (error)=>{
+          console.error(error)
+        }
+      )
+
   }
 
 

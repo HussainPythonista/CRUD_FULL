@@ -10,9 +10,8 @@ import { StudentService } from '../service/student.service';
 export class EditStudentsComponent implements OnInit {
   studentForm: FormGroup;
 
-  name:string= "Mohamed"
-  class_:number=10
-  class_teacher:string="Kiara mia"
+  
+
   constructor(private formBuilder: FormBuilder,private studentService:StudentService) {
     this.studentForm = this.formBuilder.group({
       roll_no: ['', Validators.required],
@@ -25,8 +24,10 @@ export class EditStudentsComponent implements OnInit {
   }
 
   ngOnInit() {}
-
+  edit:boolean=this.studentService.edit
+  new_data_to_pass=this.studentService.data_to_pass
   onSubmit() {
+    
     if (this.studentForm.valid) {
       const formData = this.studentForm.value;
 
@@ -42,5 +43,8 @@ export class EditStudentsComponent implements OnInit {
         }
       );
   }
+
+  
+  
 }
 }

@@ -10,7 +10,8 @@
     <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="roll_no">Roll No:</label>
-          <input type="number" formControlName="roll_no" id="roll_no" class="form-control"  required>
+          <input type="number" formControlName="roll_no" 
+          [ngModel]=" edit? new_data_to_pass.roll_no: null " id="roll_no" class="form-control"   required>
         </div>
       
         <div class="form-group">
@@ -20,21 +21,24 @@
       
         <div class="form-group">
           <label for="age">Age:</label>
-          <input type="number" formControlName="age" id="age" class="form-control" required>
+          <input type="number" formControlName="age" id="age" class="form-control" [ngModel]=" edit? new_data_to_pass.age: null "  required>
         </div>
       
         <div class="form-group">
           <label for="class">Class:</label>
-          <input type="text" formControlName="class" id="class" class="form-control" required>
+          <input type="text" formControlName="class" 
+          [ngModel]=" edit? new_data_to_pass.class: null " id="class" class="form-control" required>
         </div>
       
         <div class="form-group">
           <label for="section">Section:</label>
-          <input type="text" formControlName="section" id="section" class="form-control" required>
+          <input type="text" formControlName="section" id="section" 
+          [ngModel]=" edit? new_data_to_pass.sec: null " class="form-control" required>
         </div>
         <div class="form-group">
             <label for="class_teacher">Class Teacher:</label>
-            <input type="text" formControlName="class_teacher" id="class_teacher" class="form-control" required>
+            <input type="text" formControlName="class_teacher" id="class_teacher"
+            [ngModel]=" edit? new_data_to_pass.class_teacher: null " class="form-control" required>
         </div>
         <button type="submit"  class="btn btn-primary">Submit</button>
     </form>
