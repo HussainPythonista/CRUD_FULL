@@ -7,6 +7,7 @@ import { EditStudentsComponent } from './edit-students/edit-students.component';
 const routes: Routes = [
   {path:'', component:StudentListComponent},
   {path:'edit',component:EditStudentsComponent},
+  {path:'add',component:EditStudentsComponent},
 ];
 
 @NgModule({

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../models/student.model';
 import { StudentService } from '../service/student.service';
-import { single } from 'rxjs';
 import { Router,NavigationExtras  } from '@angular/router';
 
 
@@ -23,29 +22,32 @@ export class StudentListComponent implements OnInit {
     
   }
 
-  navigateToEditPageWithData() {
-    const data = {
-      age: 25,
-      name: 'John Doe',
-      subject: 'Mathematics'
-    };
+  // navigateToEditPageWithData() {
+  //   const data = {
+  //     age: 25,
+  //     name: 'John Doe',
+  //     subject: 'Mathematics'
+  //   };
   
-    const navigationExtras: NavigationExtras = {
-      state: data
-    };
+  //   const navigationExtras: NavigationExtras = {
+  //     state: data
+  //   };
   
-    this.router.navigateByUrl('/edit', navigationExtras);
-  }
+  //   this.router.navigateByUrl('/edit', navigationExtras);
+  // }
 
   student_edit(roll_no:any){
       //this.router.navigateByUrl("/edit")
       this.studentService.edit=true
+      this.studentService.edit_roll_no=roll_no
       this.studentService.getOneStudent(roll_no).subscribe(
         (response)=>{
           this.data_edit=(response)
           this.studentService.stu_info_edit(this.data_edit)
           console.log(this.studentService.data_to_pass)
           this.router.navigateByUrl("/edit")
+          
+          
         },
         (error)=>{
           console.error(error)
@@ -54,6 +56,10 @@ export class StudentListComponent implements OnInit {
 
   }
 
+  add_student(){
+      this.studentService.edit=false
+      this.router.navigateByUrl("/add")
+  }
 
   fetchOne(roll_no:any):void{
     console.log(roll_no)

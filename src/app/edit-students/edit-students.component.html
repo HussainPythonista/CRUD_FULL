@@ -7,7 +7,7 @@
 </head>
 <body>
   
-    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="studentForm" (ngSubmit)="edit? loadStudentData():onSubmit()">
         <div class="form-group">
           <label for="roll_no">Roll No:</label>
           <input type="number" formControlName="roll_no" 
@@ -16,28 +16,31 @@
       
         <div class="form-group">
           <label for="name">Name:</label>
-          <input type="text" formControlName="name" id="name" class="form-control" required>
+          <input type="text" name="name" id="name" class="form-control" 
+          [(ngModel)]=" edit? null: new_data_to_pass.name " required>
         </div>
       
         <div class="form-group">
           <label for="age">Age:</label>
-          <input type="number" formControlName="age" id="age" class="form-control" [ngModel]=" edit? new_data_to_pass.age: null "  required>
+          <input type="number" name="age" formControlName="age" id="age" class="form-control" 
+          [ngModel]=" edit? new_data_to_pass.age : null "  required>
         </div>
       
         <div class="form-group">
           <label for="class">Class:</label>
-          <input type="text" formControlName="class" 
+          <input type="text" formControlName="class" name="class_"
           [ngModel]=" edit? new_data_to_pass.class: null " id="class" class="form-control" required>
         </div>
       
         <div class="form-group">
           <label for="section">Section:</label>
-          <input type="text" formControlName="section" id="section" 
-          [ngModel]=" edit? new_data_to_pass.sec: null " class="form-control" required>
+          <input type="text" formControlName="section" id="section" name="sec"
+          [ngModel]=" edit? new_data_to_pass.section: null " class="form-control" required>
         </div>
         <div class="form-group">
             <label for="class_teacher">Class Teacher:</label>
-            <input type="text" formControlName="class_teacher" id="class_teacher"
+            <input type="text" formControlName="class_teacher"
+            name="class_teacher" id="class_teacher"
             [ngModel]=" edit? new_data_to_pass.class_teacher: null " class="form-control" required>
         </div>
         <button type="submit"  class="btn btn-primary">Submit</button>

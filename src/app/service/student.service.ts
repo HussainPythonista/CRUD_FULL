@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { Student } from '../models/student.model';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -11,8 +10,10 @@ export class StudentService {
   public data_to_pass: any;
 
   public edit:boolean=false
+  public edit_roll_no:number=0
+
   constructor(private http: HttpClient) {
-    
+  
    }
 
   // Fetch all students from the Flask API
@@ -40,5 +41,14 @@ export class StudentService {
     this.edit=true
     this.data_to_pass=data
   }
+
+  
+  updateStudent(rollNo: number, data: any){
+      
+  console.log(rollNo)
+  }
+
+
+
 
 }
