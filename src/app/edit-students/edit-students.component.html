@@ -13,12 +13,13 @@
           <input type="number" formControlName="roll_no" 
           [ngModel]=" edit? new_data_to_pass.roll_no: null " id="roll_no" class="form-control"   required>
         </div>
-      
         <div class="form-group">
           <label for="name">Name:</label>
-          <input type="text" name="name" id="name" class="form-control" 
-          [(ngModel)]=" edit? null: new_data_to_pass.name " required>
+          <input type="text" formControlName="name" 
+          [ngModel]=" edit? new_data_to_pass.name: null " id="name" class="form-control"   required>
         </div>
+      
+       
       
         <div class="form-group">
           <label for="age">Age:</label>
