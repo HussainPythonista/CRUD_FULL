@@ -65,35 +65,47 @@ export class EditStudentsComponent implements OnInit {
   inputVal(){
     console.log(this.age)
   }
+
+
+  add_details(formData:any){
+    
+    this.studentService.addStudent(formData).subscribe(
+      (response) => {
+        alert(response)
+        // Optionally, you can perform any other actions or show a success message here
+      },
+      (error) => {
+        console.error('Error sending data:', error);
+        // Optionally, you can show an error message here
+      }
+    );
+  }
+
   onSubmit() {
 
     const formData = this.studentForm.value;
-    this.studentService.check_present(formData.roll_no).subscribe(
+    const roll_no=formData.roll_no
+    this.studentService.check_present(roll_no).subscribe(
       (response)=>{
-        alert(response)
-
+        if (response==true){
+          if (confirm("Roll No is already esist Do you want to update")==true){
+            //const formData = this.studentForm.value;
+            this.add_details(formData)
+          }
+          else{
+            alert("Thank You! Details not updated")}}
+        else{
+          this.add_details(formData)
         }
+        },
         
+      (error)=>{
+        console.log(error)
+      }        
     )
-//     if (this.studentForm.valid) {
-//       const formData = this.studentForm.value;
 
-//       // Call the addStudent method from the service
-//        this.studentService.addStudent(formData).subscribe(
-//         (response) => {
-//           alert(response)
-//           // Optionally, you can perform any other actions or show a success message here
-//         },
-//         (error) => {
-//           console.error('Error sending data:', error);
-//           // Optionally, you can show an error message here
-//         }
-//       );
-//   }
-
- 
   
-// }
 }
 }
+
 

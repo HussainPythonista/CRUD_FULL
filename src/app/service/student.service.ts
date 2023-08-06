@@ -19,8 +19,8 @@ export class StudentService {
 
 
   check_present(roll_no:number){
-    const url =`${this.apiUrl}//check_present/${roll_no}`
-    return this.http.get<boolean>(url)
+    const url =`${this.apiUrl}/check_present/${roll_no}`
+    return this.http.get<any>(url)
   } 
 
   // Fetch all students from the Flask API
