@@ -85,12 +85,18 @@ export class EditStudentsComponent implements OnInit {
 
     const formData = this.studentForm.value;
     const roll_no=formData.roll_no
+
     this.studentService.check_present(roll_no).subscribe(
       (response)=>{
         if (response==true){
           if (confirm("Roll No is already esist Do you want to update")==true){
             //const formData = this.studentForm.value;
-            this.add_details(formData)
+            this.studentService.check_present(roll_no).subscribe(
+              (response)=>{
+                console.log("present")
+              }
+            )
+            
           }
           else{
             alert("Thank You! Details not updated")}}
@@ -101,11 +107,14 @@ export class EditStudentsComponent implements OnInit {
         
       (error)=>{
         console.log(error)
-      }        
-    )
+          }        
+      )
 
   
-}
+      }
+      dummy(){
+          console.log(this.studentForm.value)
+      }
 }
 
 
