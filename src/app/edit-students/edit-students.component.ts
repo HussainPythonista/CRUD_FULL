@@ -75,25 +75,25 @@ export class EditStudentsComponent implements OnInit {
         }
         
     )
-    if (this.studentForm.valid) {
-      const formData = this.studentForm.value;
+//     if (this.studentForm.valid) {
+//       const formData = this.studentForm.value;
 
-      // Call the addStudent method from the service
-       this.studentService.addStudent(formData).subscribe(
-        (response) => {
-          alert(response)
-          // Optionally, you can perform any other actions or show a success message here
-        },
-        (error) => {
-          console.error('Error sending data:', error);
-          // Optionally, you can show an error message here
-        }
-      );
-  }
+//       // Call the addStudent method from the service
+//        this.studentService.addStudent(formData).subscribe(
+//         (response) => {
+//           alert(response)
+//           // Optionally, you can perform any other actions or show a success message here
+//         },
+//         (error) => {
+//           console.error('Error sending data:', error);
+//           // Optionally, you can show an error message here
+//         }
+//       );
+//   }
 
  
   
+// }
 }
 }
-
 
