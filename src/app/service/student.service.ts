@@ -16,6 +16,13 @@ export class StudentService {
   
    }
 
+
+
+  check_present(roll_no:number){
+    const url =`${this.apiUrl}//check_present/${roll_no}`
+    return this.http.get<boolean>(url)
+  } 
+
   // Fetch all students from the Flask API
   getAllStudents(): Observable<Student[]> {
     const url = `${this.apiUrl}`;
@@ -43,9 +50,9 @@ export class StudentService {
   }
 
   
-  updateStudent(rollNo: number, data: any){
+  updateStudent ({ rollNo, data }: { rollNo: number; data: any; }):Observable<Student>{
       
-  console.log(rollNo)
+  return this.http.put<Student>(`${this.apiUrl}/add`,data)
   }
 
 

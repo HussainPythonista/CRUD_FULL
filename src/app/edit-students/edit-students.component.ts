@@ -36,11 +36,20 @@ export class EditStudentsComponent implements OnInit {
   loadStudentData() {
     this.studentService.getOneStudent(this.studentService.edit_roll_no).subscribe(
       (response:any)=>{
-        alert(this.studentForm.value.name)
-        alert(this.studentForm.value.age)
-        alert(this.studentForm.value.roll_no)
-        alert(this.studentForm.value.class)
-        alert(this.studentForm.value.class_teacher)
+        let update={name:this.studentForm.value.name,
+        age:this.studentForm.value.age,
+        roll_no:this.studentForm.value.roll_no,
+        class:this.studentForm.value.class,
+        class_teacher:this.studentForm.value.class_teacher,
+        sec:this.studentForm.value.sec
+      }
+      this.studentService.updateStudent({ rollNo: update.roll_no, data: update }).subscribe(
+        (response)=>{
+        alert(response)},
+        (error)=>{
+          console.error(error)
+        }
+      )
       }
     )
   }
@@ -58,6 +67,14 @@ export class EditStudentsComponent implements OnInit {
   }
   onSubmit() {
 
+    const formData = this.studentForm.value;
+    this.studentService.check_present(formData.roll_no).subscribe(
+      (response)=>{
+        alert(response)
+
+        }
+        
+    )
     if (this.studentForm.valid) {
       const formData = this.studentForm.value;
 
