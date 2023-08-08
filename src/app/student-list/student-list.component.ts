@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Student } from '../models/student.model';
 import { StudentService } from '../service/student.service';
 import { Router,NavigationExtras  } from '@angular/router';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -22,29 +23,41 @@ export class StudentListComponent implements OnInit {
     
   }
   list_delete:any=[]
+  isClicked:boolean=false
   checked(roll_no:any){
-    
-    this.list_delete.push(roll_no)
-
-    
+    if (this.list_delete.includes(roll_no)){
+      //this.list_delete.push(roll_no)
+      const index = this.list_delete.indexOf(roll_no);
+      this.list_delete.splice(index, 1);
+    }
+    else{
+      this.list_delete.push(roll_no)
+      //console.log(this.list_delete)
+    }
+    //console.log(this.list_delete)
+  }
+  response_message:string=""
+  delete_selected(list_delete:[]): void{
+    this.studentService.deleteListStudents(list_delete).subscribe(
+      (response)=>{
+        this.fetchStudents()
+        this.response_message=response
+        
+      },
+      (error)=>{
+        console.error(error)
+      }
+    )
+  
   }
 
-  delete_selected(list_delete:[]){
-    console.log(list_delete)
+  logOut(){
+    
+    this.studentService.logged = false;
+    this.router.navigate([""])
+    
   }
-  // navigateToEditPageWithData() {
-  //   const data = {
-  //     age: 25,
-  //     name: 'John Doe',
-  //     subject: 'Mathematics'
-  //   };
-  
-  //   const navigationExtras: NavigationExtras = {
-  //     state: data
-  //   };
-  
-  //   this.router.navigateByUrl('/edit', navigationExtras);
-  // }
+ 
 
   student_edit(roll_no:any){
       //this.router.navigateByUrl("/edit")
@@ -54,7 +67,7 @@ export class StudentListComponent implements OnInit {
         (response)=>{
           this.data_edit=(response)
           this.studentService.stu_info_edit(this.data_edit)
-          console.log(this.studentService.data_to_pass)
+          // console.log(this.studentService.data_to_pass)
           this.router.navigateByUrl("/edit")
           
           

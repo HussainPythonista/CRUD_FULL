@@ -11,5 +11,32 @@
     
     align-self: flex-end;
     margin-top: 10px;
-    
+    align-items: center;
 }
+.delete{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    
+    
+
+}
+
+/* .centered-container {
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    height: 100vh; /* Adjust this value for desired height */
+
+
+.container {
+        position: relative;
+    }
+    
+.delete {
+        position: absolute;
+        
+        right: 10px;
+        top: 35px
+    }

@@ -55,7 +55,9 @@ export class StudentService {
   return this.http.put<Student>(`${this.apiUrl}/add`,data)
   }
 
-
+  deleteListStudents(list_student:any):Observable<any>{
+      return this.http.delete<any>(`${this.apiUrl}/delete_select/${list_student}`)
+  }
 
 
 }
