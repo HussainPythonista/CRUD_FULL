@@ -11,7 +11,7 @@ export class StudentService {
 
   public edit:boolean=false
   public edit_roll_no:number=0
-
+  public logged:boolean=false
   constructor(private http: HttpClient) {
   
    }

@@ -21,7 +21,17 @@ export class StudentListComponent implements OnInit {
     this.fetchStudents();
     
   }
+  list_delete:any=[]
+  checked(roll_no:any){
+    
+    this.list_delete.push(roll_no)
 
+    
+  }
+
+  delete_selected(list_delete:[]){
+    console.log(list_delete)
+  }
   // navigateToEditPageWithData() {
   //   const data = {
   //     age: 25,

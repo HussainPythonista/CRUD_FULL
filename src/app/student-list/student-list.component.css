@@ -1,0 +1,15 @@
+/* Style for the container */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px; /* Add margin for spacing */
+}
+
+/* Style for the "Delete Selected" button */
+.btn-danger {
+    
+    align-self: flex-end;
+    margin-top: 10px;
+    
+}

@@ -8,6 +8,7 @@
 </head>
 <body>
     <button (click)="add_student()">Add</button>
+    <button (click)="delete_selected(list_delete)">Delete Selected</button>
     <div *ngIf="students.length>0">
         <table class="table table-bordered">
             <tr>
@@ -20,7 +21,7 @@
                 <th>Class Teacher</th> 
             </tr>
             <tr *ngFor="let student of students">
-                    <input  type="checkbox">
+                    <input  type="checkbox" (click)="checked(student.roll_no)">
                     <td >{{student.roll_no}}</td>
                     <td>{{student.name}}</td>
                     <td>{{student.age}}</td>
@@ -36,5 +37,6 @@
         </table>
     </div>
     <div *ngIf="students.length<=0">No Data</div>
+    <button class="btn btn-danger" (click)="delete_selected(list_delete)">Delete Selected</button>
 </body>
 </html>
