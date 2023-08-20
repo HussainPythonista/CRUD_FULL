@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<style>
+    /* Add custom CSS styles here */
+    
+    
+    
+</style>
+    
+<body>
+    <header class="gradient-header">
+        <h2 class="header-text">Student Information</h2>
+    </header>
+    
+    <div class="button-container">
+        <button class="btn center-button" (click)="add_student_info()" [ngStyle]="{'bac':'blue'}">Add Student</button>
+        <button class="btn btn-danger delete right-align" *ngIf="student_details.length>1" (click)="delete_selected(list_delete)">Delete Selected</button>
+    </div>
+    <ng-container *ngIf="add_student" >
+        <form [formGroup]="addStudentForm" (submit)="submitForm()">
+            <td><input placeholder="Roll No" type="number" formControlName="roll_no" name="roll_no" required></td>
+            <td><input placeholder="Name" type="text" formControlName="name"></td>
+            <td><input placeholder="class" type="text" formControlName="class"></td>
+            <td><input placeholder="Section" type="text" formControlName="section"></td>
+            <td><input placeholder="Class teacher" type="text" formControlName="class_teacher"></td>
+            <td><input type="text" placeholder="Age" formControlName="age"></td>
+            <td>
+                <div class="button-container">
+                    <button class="btn center-button"  (click)="save_edit()">
+                        <img src="assets\8666542_save_icon.png" alt="Edit Icon" width="20" height="20"></button>
+                    <button class="btn center-button"  (click)="cancel()">
+                        <img  src="assets\4781838_cancel_close_delete_exit_logout_icon.png" alt="Edit Icon" width="20" height="20">
+                    </button>
+                
+                </div>
+                
+        </form>
+    </ng-container>
+    <form [formGroup]="studentForm" (submit)="submitForm()">
+        <table class="data-table">
+            <tr>
+                
+                
+                <th [ngStyle]="{'color':'white',
+                'font-family': 'Courier New',
+                'font-size': '15px'}"><input type="checkbox" class="custom-checkbox"
+                (click)="deleteall()" >  </th>
+                <th class="table-col">Roll No</th>
+                
+                <th class="table-col">Name</th>
+                <th class="table-col">Class</th>
+                <th class="table-col">Section</th>
+                <th class="table-col">Class Teacher</th>
+                <th class="table-col">Age</th>
+                <th class="table-col"> Actions</th>
+        
+            <tr *ngFor="let info of student_details; let i = index" class="student-row">
+                <ng-container *ngIf="edit_student_roll == info.roll_no; else viewRow">
+                        <td ></td>
+                        <td><input type="number" formControlName="roll_no" [(ngModel)]="info.roll_no"></td>
+                        <td><input type="text" formControlName="name" [(ngModel)]="info.name" ></td>
+                        <td><input type="text" formControlName="class" [(ngModel)]="info.class"></td>
+                        <td><input type="text" formControlName="section" [(ngModel)]="info.section"></td>
+                        <td><input type="text" formControlName="class_teacher" [(ngModel)]="info.class_teacher"></td>
+                        <td><input type="text" formControlName="age" [(ngModel)]="info.age"></td>
+
+                        <td>
+                            <div class="button-container">
+                                <button class="btn center-button" (click)="save_edit()">
+                                    <img src="assets\8666542_save_icon.png" alt="Edit Icon" width="20" height="20"></button>
+                                <button class="btn center-button"  (click)="cancel()">
+                                    <img  src="assets\4781838_cancel_close_delete_exit_logout_icon.png" alt="Edit Icon" width="20" height="20">
+                                </button>
+                            
+                            </div>
+                        </td>
+                </ng-container>
+                <ng-template #viewRow>
+                    
+                    <td class="empty-td"><input class="custom-checkbox" type="checkbox" (click)="checked(info.roll_no)"></td>
+                    <td class="student-row">{{ info.roll_no }}</td>
+                    <td class="student-row">{{ info.name }}</td>
+                    <td class="student-row">{{ info.class }}</td>
+                    <td class="student-row">{{ info.section }}</td>
+                    <td class="student-row">{{ info.class_teacher }}</td>
+                    <td class="student-row">{{ info.age }}</td>
+                    <td>
+                        <button class="btn center-button" (click)="edit_info(info.roll_no)">
+                            <img src="assets/8542056_edit_write_icon.png" alt="Edit Icon" width="20" height="20">
+                        </button>   
+                        <button  class="btn center-button" (click)="delete_info(info.roll_no)"><img src="assets/3669361_delete_ic_icon.png" alt="Edit Icon" width="20" height="20"></button>
+                    </td>
+                </ng-template>
+            </tr>
+            
+            <tr>
+                
+            </tr>
+        </table>
+        
+    </form>
+</body>
+</html>

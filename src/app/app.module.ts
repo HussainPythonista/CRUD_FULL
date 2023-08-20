@@ -9,12 +9,14 @@ import { EditStudentsComponent } from './edit-students/edit-students.component'
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/LoginComponent';
+import { StudentInfoComponent } from './student-info/student-info.component';
+
 
 //import { StudentListComponent } from './student-list/student-list.component';
 //import { StudentFormComponent } from './student-form/student-form.component';
 
 @NgModule({
-  declarations: [AppComponent, StudentListComponent,EditStudentsComponent, LoginComponent],
+  declarations: [AppComponent, StudentListComponent,EditStudentsComponent, LoginComponent, StudentInfoComponent],
   imports: [BrowserModule, HttpClientModule, FormsModule, ReactiveFormsModule,BrowserModule,
     AppRoutingModule, // Make sure your AppRoutingModule or equivalent is imported here
     RouterModule],

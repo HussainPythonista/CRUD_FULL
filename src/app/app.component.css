@@ -1,0 +1,22 @@
+header h1 {
+    font-size: 70px;
+    font-weight: 600;
+    background-image: linear-gradient(to left, #553c9a, #b393d3);
+    color: beige;
+    background-clip: text;
+    -webkit-background-clip: text;
+    
+  }
+  .gradient-header {
+    background: linear-gradient(to right, #FF6B6B, #3F51B5); /* Adjust gradient colors */
+    padding: 5px;
+    text-align: center;
+    /* color: rgb(168, 26, 26); */
+    transition: background 0.3s ease; /* Smooth background color transition */
+    color: black;
+  }
+  
+  .gradient-header:hover {
+    background: linear-gradient(to right, #3F51B5, #FF6B6B); /* Adjust hover gradient colors */
+  }
+  

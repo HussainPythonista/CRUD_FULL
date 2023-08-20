@@ -5,7 +5,8 @@
     align-items: center;
     margin-top: 10px; /* Add margin for spacing */
 }
-
+table{
+background-image: linear-gradient(to left, #553c9a, #b393d3);}
 /* Style for the "Delete Selected" button */
 .btn-danger {
     
