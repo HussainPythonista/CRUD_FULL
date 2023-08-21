@@ -10,13 +10,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/LoginComponent';
 import { StudentInfoComponent } from './student-info/student-info.component';
+import { TestComponent } from './test/test.component';
 
 
 //import { StudentListComponent } from './student-list/student-list.component';
 //import { StudentFormComponent } from './student-form/student-form.component';
 
 @NgModule({
-  declarations: [AppComponent, StudentListComponent,EditStudentsComponent, LoginComponent, StudentInfoComponent],
+  declarations: [AppComponent, StudentListComponent,EditStudentsComponent, LoginComponent, StudentInfoComponent, TestComponent],
   imports: [BrowserModule, HttpClientModule, FormsModule, ReactiveFormsModule,BrowserModule,
     AppRoutingModule, // Make sure your AppRoutingModule or equivalent is imported here
     RouterModule],
