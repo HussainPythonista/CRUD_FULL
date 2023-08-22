@@ -82,7 +82,7 @@
                 <div class="button-container">
                     <button class="btn center-button"  (click)="save_edit()">
                         <img src="assets\8666542_save_icon.png" alt="Edit Icon" width="20" height="20"></button>
-                    <button class="btn center-button"  (click)="cancel()">
+                    <button class="btn center-button"  (click)="cancel_add()">
                         <img  src="assets\4781838_cancel_close_delete_exit_logout_icon.png" alt="Edit Icon" width="20" height="20">
                     </button>
                 
@@ -92,18 +92,18 @@
             <tr *ngFor="let info of student_details; let i = index" class="student-row">
                 <ng-container *ngIf="edit_student_roll == info.roll_no; else viewRow">
                         <td ></td>
-                        <td><input type="number" formControlName="roll_no" [(ngModel)]="info_pass_template.roll_no"></td>
-                        <td><input type="text" formControlName="name" [(ngModel)]="info_pass_template.name" ></td>
-                        <td><input type="text" formControlName="class" [(ngModel)]="info_pass_template.class"></td>
-                        <td><input type="text" formControlName="section" [(ngModel)]="info_pass_template.section"></td>
-                        <td><input type="text" formControlName="class_teacher" [(ngModel)]="info_pass_template.class_teacher"></td>
-                        <td><input type="text" formControlName="age" [(ngModel)]="info_pass_template.age"></td>
+                        <td><input type="number" formControlName="roll_no" [ngModel]="info_pass_template.roll_no"></td>
+                        <td><input type="text" formControlName="name" [ngModel]="info_pass_template.name" ></td>
+                        <td><input type="text" formControlName="class" [ngModel]="info_pass_template.class"></td>
+                        <td><input type="text" formControlName="section" [ngModel]="info_pass_template.section"></td>
+                        <td><input type="text" formControlName="class_teacher" [ngModel]="info_pass_template.class_teacher"></td>
+                        <td><input type="text" formControlName="age" [ngModel]="info_pass_template.age"></td>
 
                         <td>
                             <div class="button-container">
                                 <button class="btn center-button" (click)="save_edit()">
                                     <img src="assets\8666542_save_icon.png" alt="Edit Icon" width="20" height="20"></button>
-                                <button class="btn center-button"  (click)="cancel()">
+                                <button class="btn center-button"  (click)="cancel_edit()">
                                     <img  src="assets\4781838_cancel_close_delete_exit_logout_icon.png" alt="Edit Icon" width="20" height="20">
                                 </button>
                             

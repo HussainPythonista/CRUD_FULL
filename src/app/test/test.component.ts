@@ -128,12 +128,19 @@ export class TestComponent {
     info_pass_template:any;
 
     edit_info(roll_no:number){
-      console.log(roll_no)
+      if (this.add_student==false){
+        console.log(roll_no)
 
-      this.edit_student_info=true
-      console.log(this.edit_student_info)
-      this.info_pass_template=this.student_details.find((student)=>student.roll_no==roll_no)
-      this.edit_student_roll=roll_no
+        this.edit_student_info=true
+        console.log(this.edit_student_info)
+        this.info_pass_template=this.student_details.find((student)=>student.roll_no==roll_no)
+        this.edit_student_roll=roll_no
+      }
+      else{
+        this.cancel_add()
+        this.edit_info(roll_no)
+      }
+      
 
     }
     delete_info(roll_no:number){
@@ -147,10 +154,16 @@ export class TestComponent {
     }
 
     add_student_info(){
-      console.log("Student Add")
-      this.resetForm()
-      this.edit_student_info=false
-      this.add_student=!this.add_student
+      if (this.edit_student_info==false){
+        this.add_student=!this.add_student
+      }
+      
+      else{
+        this.resetForm()
+        this.cancel_edit()
+        this.add_student_info()
+      }
+      
       
     }
     
@@ -190,12 +203,18 @@ export class TestComponent {
       }
   
   }
-    cancel(){
+  cancel_add(){
+    console.log("add cancel")
+    return this.add_student=false
+    
+  }
+    cancel_edit(){
       
 
       this.edit_student_roll = null;
       this.edit_student_info = false;
-      this.add_student=false
+      console.log("edit cancel")
+      
       
     }
     resetForm() {
