@@ -15,27 +15,54 @@
 </style>
     
 <body>
-
-    <div class="search-container">
+    
+    <!-- <div class="search-container">
         <input type="text" [(ngModel)]="searchText" placeholder="Search by Roll No or Name">
         <button (click)="searchStudents()">Search</button>
         <button (click)="clearSearch()">Clear</button>
-    </div>
+    </div> -->
     
     <header class="gradient-header">
-        <h2 class="header-text">Student Information</h2>
+        
+        <div class="header-container">
+            <h2 class="header-text">Student Information</h2>
+            <button id="logout" class="btn center-button" (click)="searchStudents()" [ngStyle]="{'background':'royal blue'}">
+                <img src="assets/logout.png" width="20">
+            </button>
+            
+        </div>
+        <div class="button-container">
+            <div class="search-container">
+                <input
+                  type="text"
+                  [(ngModel)]="searchText"
+                  placeholder="Search by Roll No or Name"
+                  class="custom-input" id="input-search"
+                >
+                <button class="btn center-button" (click)="searchStudents()" [ngStyle]="{'background':'royal blue'}"><img src="assets/search.png" width="20"></button>
+                <!--button class="btn center-button" (click)="clearSearch()"><img src="assets/4781838_cancel_close_delete_exit_logout_icon.png" width="20"></button-->
+              </div>
+              
+              <div class="center-button-container" id="dummy">
+                <button class="btn center-button"  (click)="add_student_info()">
+                    <img class="dummy" src="assets/176-1760952_add-user-symbol-comments-add-user-icon-png.png" width="20">
+                </button>
+                <button  [disabled]="isDeleteDisabled==true" id="delete-selected" 
+                class="btn center-button" 
+                *ngIf="student_details.length>1 && list_delete.length>0 " (click)="delete_selected(list_delete)">
+                <img src="assets/3221803.png"  width="20"></button>
+            </div>
+            
+        </div>
     </header>
     
-    <div class="button-container">
-        <button class="btn center-button" (click)="add_student_info()" [ngStyle]="{'background':'blue'}">Add Student</button>
-        <button class="btn btn-danger delete right-align" *ngIf="student_details.length>1" (click)="delete_selected(list_delete)">Delete Selected</button>
-    </div>
+    
     <ng-container *ngIf="add_student" >
         <form [formGroup]="addStudentForm" (submit)="submitForm()">
                 
     </form>
     </ng-container>
-    <form [formGroup]="addStudentForm" (submit)="submitForm()"></form>
+    
     <form [formGroup]="studentForm" (submit)="submitForm()">
         <table class="data-table">
             <tr>
@@ -45,34 +72,43 @@
                 (click)="deleteall()" >  </th>
                
                 <th class="table-col">
-                    <button class="sort-button"  (click)="sortData('roll_no','asc')">▲</button>
-                    <button class="sort-button" (click)="sortData('roll_no','dec')">▼</button>Roll No</th>
+                    <button class="sort-button" (click)="sort_clicked('roll_no')">
+                        <img src="assets/sort.png"  width="18"></button>
+                    <!--button class="sort-button" (click)="sortData('roll_no','dec')">▼</button-->Roll No</th>
                 
-                <th class="table-col"> <button class="sort-button"  (click)="sortData('name','asc')">▲</button>
-                    <button class="sort-button" (click)="sortData('name','dec')">▼</button>Name</th>
-                
-                
-                <th class="table-col"> <button class="sort-button"  (click)="sortData('class','asc')">▲</button>
-                    <button class="sort-button" (click)="sortData('class','dec')">▼</button>Class</th>
-                
-                
-                <th class="table-col"> <button class="sort-button"  (click)="sortData('section','asc')">▲</button>
-                    <button class="sort-button" (click)="sortData('section','dec')">▼</button>Section</th>
+                <th class="table-col"> 
+                    <button class="sort-button"  (click)="sort_clicked('name')">
+                    <img src="assets/sort.png"  width="18"></button>
+                    <!--button class="up-down" (click)="sortData('name','dec')">▼</button-->Name</th>
                 
                 
-                <th class="table-col"> <button class="sort-button"  (click)="sortData('class_teacher','asc')">▲</button>
-                    <button class="sort-button" (click)="sortData('class_teacher','dec')">▼</button>Class Teacher</th>
+                <th class="table-col"> <button class="sort-button"  (click)="sort_clicked('class')">
+                    <img src="assets/sort.png"  width="18"></button>
+                    <!--button class="up-down" (click)="sortData('class','dec')">▼</button-->Class</th>
                 
                 
-                <th class="table-col"> <button class="sort-button"  (click)="sortData('age','asc')">▲</button>
-                    <button class="sort-button" (click)="sortData('age','dec')">▼</button>Age</th>
+                <th class="table-col"> <button class="sort-button"  (click)="sort_clicked('section')">
+                    <img src="assets/sort.png"  width="18"></button>
+                    <!--button class="sort-button" (click)="sortData('section','dec')">
+                        <img src="assets/down-filled-triangular-arrow.png"  width="10"></button-->Section</th>
+                
+                
+                <th class="table-col"> <button class="sort-button" (click)="sort_clicked('class_teacher')">
+                    <img src="assets/sort.png"  width="18"></button>
+                    <!--button class="up-down" (click)="sortData('class_teacher','dec')">▼</button-->Class Teacher</th>
+                
+                
+                <th class="table-col"> 
+                    <button class="sort-button"  (click)="sort_clicked('age')">
+                        <img src="assets/sort.png"  width="18"></button>
+                    <!--button class="up-down" (click)="sortData('age','dec')">▼</button-->Age</th>
                 
             
                 <th class="table-col"> Actions</th>
         </tr>
         <ng-container *ngIf="add_student" >
             <td>New Info:</td>
-            <td><input placeholder="Roll No" type="number" formControlName="roll_no" name="roll_no" required></td>
+            <td><input placeholder="Roll No" type="number"  formControlName="roll_no" name="roll_no" required></td>
             <td><input placeholder="Name" type="text" formControlName="name"></td>
             <td><input placeholder="class" type="text" formControlName="class"></td>
             <td><input placeholder="Section" type="text" formControlName="section"></td>

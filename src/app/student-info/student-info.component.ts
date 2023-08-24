@@ -13,6 +13,10 @@ export class StudentInfoComponent implements OnInit {
   edit_student_info=false
   studentForm: FormGroup;
   addStudentForm: FormGroup;
+  add_student:boolean=false
+  edit_student_roll: number |null=null;
+
+  info_pass_template:any;
     // student_details=[
     //   {
     //     "roll_no": 101,
@@ -123,10 +127,7 @@ export class StudentInfoComponent implements OnInit {
       
       this.get_student()
     }
-    add_student:boolean=false
-    edit_student_roll: number |null=null;
-
-    info_pass_template:any;
+    
 
     edit_info(roll_no:number){
       console.log(roll_no)
@@ -150,6 +151,7 @@ export class StudentInfoComponent implements OnInit {
     add_student_info(){
       console.log("Student Add")
       this.add_student=!this.add_student
+      this.resetForm()
     }
     
     

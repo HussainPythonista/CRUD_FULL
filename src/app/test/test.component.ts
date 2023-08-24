@@ -154,12 +154,13 @@ export class TestComponent {
     }
 
     add_student_info(){
+      this.resetForm()
       if (this.edit_student_info==false){
         this.add_student=!this.add_student
       }
       
       else{
-        this.resetForm()
+        
         this.cancel_edit()
         this.add_student_info()
       }
@@ -224,7 +225,15 @@ export class TestComponent {
       }
     list_delete:any=[]
     isClicked:boolean=false
+    isDeleteDisabled: boolean = false;
+
+    // Update this property whenever selectedItems change
+    updateDeleteButtonStatus() {
+      console.log("update")
+    }
+
     checked(roll_no:any){
+      this.updateDeleteButtonStatus()
       if (this.list_delete.includes(roll_no)){
         //this.list_delete.push(roll_no)
         const index = this.list_delete.indexOf(roll_no);
@@ -287,15 +296,16 @@ export class TestComponent {
         
         sortData(col_Name:any,type:any){
           console.log(col_Name,type)
-          if (col_Name=='roll_no'){
-              if (type=='dec'){
+          
+          if (col_Name=="roll_no"){
+            if (type==true){
                 this.student_details=this.student_details.sort((a,b)=>b.roll_no-a.roll_no)
                 console.log("roll_no is clicked",type)
-              }
-              else if (type=='asc'){
-                this.student_details=this.student_details.sort((a,b)=>a.roll_no-b.roll_no)
-                console.log("roll_no is clicked",type)
-              }
+            }
+            else if (type==false){
+                    this.student_details=this.student_details.sort((a,b)=>a.roll_no-b.roll_no)
+                    console.log("roll_no is clicked",type)
+                  }
           }
           if (col_Name=='name'){
             if (type=='dec'){
@@ -347,11 +357,13 @@ export class TestComponent {
                       console.log("section is clicked",type)
                     }
                     }
-
-              
-
-      
   
+        }
+        descending=false
+        sort_clicked(col_Name:string){
+          this.descending=!this.descending
+          console.log(this.descending)
+          this.sortData(col_Name,this.descending)
         }
         search=false
         searchText: string = '';
