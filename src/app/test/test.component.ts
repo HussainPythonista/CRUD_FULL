@@ -289,7 +289,7 @@ export class TestComponent {
           this.showDelete = false;
         }
         deleteall(){
-          console.log("Delete all selected")
+          
         }
         sortde:Student[]=[]
         
@@ -308,51 +308,51 @@ export class TestComponent {
                   }
           }
           if (col_Name=='name'){
-            if (type=='dec'){
+            if (type==true){
               this.student_details=this.student_details.sort((a,b)=>b.name.localeCompare(a.name))
               console.log("name is clicked",type)
             }
-            else if (type=='asc'){
+            else if (type==false){
               this.student_details=this.student_details.sort((a,b)=>a.name.localeCompare(b.name))
               console.log("name is clicked",type)
             }
             }
             if (col_Name=='class'){
-              if (type=='dec'){
+              if (type==true){
                 this.student_details=this.student_details.sort((a,b)=>b.class-a.class)
                 console.log("class is clicked",type)
               }
-              else if (type=='asc'){
+              else if (type==false){
                 this.student_details=this.student_details.sort((a,b)=>a.class-b.class)
                 console.log("class is clicked",type)
               }
               }
               if (col_Name=='section'){
-                if (type=='dec'){
+                if (type==true){
                   this.student_details=this.student_details.sort((a,b)=>b.section.localeCompare(a.section))
                   console.log("section is clicked",type)
                 }
-                else if (type=='asc'){
+                else if (type==false){
                   this.student_details=this.student_details.sort((a,b)=>a.section.localeCompare(b.section))
                   console.log("section is clicked",type)
                 }
                 }
                 if (col_Name=='class_teacher'){
-                  if (type=='dec'){
+                  if (type==true){
                     this.student_details=this.student_details.sort((a,b)=>b.class_teacher.localeCompare(a.class_teacher))
                     console.log("section is clicked",type)
                   }
-                  else if (type=='asc'){
+                  else if (type==false){
                     this.student_details=this.student_details.sort((a,b)=>a.class_teacher.localeCompare(b.class_teacher))
                     console.log("section is clicked",type)
                   }
                   }
                   if (col_Name=='age'){
-                    if (type=='dec'){
+                    if (type==true){
                       this.student_details=this.student_details.sort((a,b)=>b.age-(a.age))
                       console.log("section is clicked",type)
                     }
-                    else if (type=='asc'){
+                    else if (type==false){
                       this.student_details=this.student_details.sort((a,b)=>a.age-(b.age))
                       console.log("section is clicked",type)
                     }

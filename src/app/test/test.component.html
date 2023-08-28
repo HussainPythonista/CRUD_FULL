@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Information</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
 
 </head>
 <style>
@@ -16,46 +17,41 @@
     
 <body>
     
-    <!-- <div class="search-container">
-        <input type="text" [(ngModel)]="searchText" placeholder="Search by Roll No or Name">
-        <button (click)="searchStudents()">Search</button>
-        <button (click)="clearSearch()">Clear</button>
-    </div> -->
     
-    <header class="gradient-header">
-        
-        <div class="header-container">
-            <h2 class="header-text">Student Information</h2>
-            <button id="logout" class="btn center-button" (click)="searchStudents()" [ngStyle]="{'background':'royal blue'}">
-                <img src="assets/logout.png" width="20">
-            </button>
+    <header >
+        <div class="center">
+            <div class="header ">
+                <h2 class="header-info">Student Information</h2>
             
+            </div>
         </div>
-        <div class="button-container">
-            <div class="search-container">
-                <input
-                  type="text"
-                  [(ngModel)]="searchText"
-                  placeholder="Search by Roll No or Name"
-                  class="custom-input" id="input-search"
-                >
-                <button class="btn center-button" (click)="searchStudents()" [ngStyle]="{'background':'royal blue'}"><img src="assets/search.png" width="20"></button>
-                <!--button class="btn center-button" (click)="clearSearch()"><img src="assets/4781838_cancel_close_delete_exit_logout_icon.png" width="20"></button-->
-              </div>
-              
-              <div class="center-button-container" id="dummy">
-                <button class="btn center-button"  (click)="add_student_info()">
-                    <img class="dummy" src="assets/176-1760952_add-user-symbol-comments-add-user-icon-png.png" width="20">
+        <div class="search-bar">
+            <div class="combined-add_trash">
+                <div class="add_button">
+                    <button id="add-left" class="btn" (click)="add_student_info()">
+                <img src="assets/176-1760952_add-user-symbol-comments-add-user-icon-png.png" title="Add new student" width="20">
                 </button>
                 <button  [disabled]="isDeleteDisabled==true" id="delete-selected" 
-                class="btn center-button" 
-                *ngIf="student_details.length>1 && list_delete.length>0 " (click)="delete_selected(list_delete)">
-                <img src="assets/3221803.png"  width="20"></button>
+                    class="btn delete-btn" 
+                    *ngIf="student_details.length>1 && list_delete.length>0 " (click)="delete_selected(list_delete)">
+                    <img src="assets/3221803.png" title="Delete Selected" width="20">
+                </button>
+                </div>
             </div>
-            
-        </div>
+            <div class="search-right">
+              <input
+                type="text"
+                [(ngModel)]="searchText"
+                placeholder="Search by Roll No or Name"
+                id="input-box"
+                class="custom-input round-input">
+              <button type= "button" class="btn round-button" (click)="searchStudents()">
+                <img src="assets/search.png" alt="Search" title="Search">
+              </button>
+            </div>
+          </div>
     </header>
-    
+      
     
     <ng-container *ngIf="add_student" >
         <form [formGroup]="addStudentForm" (submit)="submitForm()">
@@ -73,34 +69,34 @@
                
                 <th class="table-col">
                     <button class="sort-button" (click)="sort_clicked('roll_no')">
-                        <img src="assets/sort.png"  width="18"></button>
+                        <img src="assets/reorder.png"  width="18"></button>
                     <!--button class="sort-button" (click)="sortData('roll_no','dec')">▼</button-->Roll No</th>
                 
                 <th class="table-col"> 
                     <button class="sort-button"  (click)="sort_clicked('name')">
-                    <img src="assets/sort.png"  width="18"></button>
+                    <img src="assets/reorder.png"  width="18"></button>
                     <!--button class="up-down" (click)="sortData('name','dec')">▼</button-->Name</th>
                 
                 
                 <th class="table-col"> <button class="sort-button"  (click)="sort_clicked('class')">
-                    <img src="assets/sort.png"  width="18"></button>
+                    <img src="assets/reorder.png"  width="18"></button>
                     <!--button class="up-down" (click)="sortData('class','dec')">▼</button-->Class</th>
                 
                 
                 <th class="table-col"> <button class="sort-button"  (click)="sort_clicked('section')">
-                    <img src="assets/sort.png"  width="18"></button>
+                    <img src="assets/reorder.png"  width="18"></button>
                     <!--button class="sort-button" (click)="sortData('section','dec')">
                         <img src="assets/down-filled-triangular-arrow.png"  width="10"></button-->Section</th>
                 
                 
                 <th class="table-col"> <button class="sort-button" (click)="sort_clicked('class_teacher')">
-                    <img src="assets/sort.png"  width="18"></button>
+                    <img src="assets/reorder.png"  width="18"></button>
                     <!--button class="up-down" (click)="sortData('class_teacher','dec')">▼</button-->Class Teacher</th>
                 
                 
                 <th class="table-col"> 
                     <button class="sort-button"  (click)="sort_clicked('age')">
-                        <img src="assets/sort.png"  width="18"></button>
+                        <img src="assets/reorder.png"  width="18"></button>
                     <!--button class="up-down" (click)="sortData('age','dec')">▼</button-->Age</th>
                 
             
@@ -149,7 +145,7 @@
                 <ng-template #viewRow>
                     
                     <td class="empty-td"><input class="custom-checkbox" type="checkbox" (click)="checked(info.roll_no)"></td>
-                    <td class="student-row">{{ info.roll_no }}</td>
+                    <td class="student-row">{{info.roll_no }}</td>
                     <td class="student-row">{{ info.name }}</td>
                     <td class="student-row">{{ info.class }}</td>
                     <td class="student-row">{{ info.section }}</td>
@@ -157,9 +153,11 @@
                     <td class="student-row">{{ info.age }}</td>
                     <td>
                         <button class="btn center-button" (click)="edit_info(info.roll_no)">
-                            <img src="assets/8542056_edit_write_icon.png" alt="Edit Icon" width="20" height="20">
+                            <img src="assets/8542056_edit_write_icon.png" alt="Edit Icon" title="Edit Info" width="20" height="20">
                         </button>   
-                        <button  class="btn center-button" (click)="delete_info(info.roll_no)"><img src="assets/3669361_delete_ic_icon.png" alt="Edit Icon" width="20" height="20"></button>
+                        <button  class="btn center-button" (click)="delete_info(info.roll_no)">
+                            <img src="assets/3669361_delete_ic_icon.png" alt="Edit Icon" width="20" height="20"
+                            title="Delete Info"></button>
                     </td>
                 </ng-template>
             </tr>
