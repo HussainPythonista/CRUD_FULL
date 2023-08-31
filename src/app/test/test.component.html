@@ -26,6 +26,7 @@
             </div>
         </div>
         <div class="search-bar">
+            
             <div class="combined-add_trash">
                 <div class="add_button">
                     <button id="add-left" class="btn" (click)="add_student_info()">
@@ -39,13 +40,14 @@
                 </div>
             </div>
             <div class="search-right">
+            
               <input
-                type="text"
-                [(ngModel)]="searchText"
+                type="text" (ngModelChange)="handleSearchInput()" 
+                [(ngModel)]="searchText" (keydown)="handleKeyDown($event)"
                 placeholder="Search by Roll No or Name"
                 id="input-box"
-                class="custom-input round-input">
-              <button type= "button" class="btn round-button" (click)="searchStudents()">
+                class="custom-input round-input" >
+              <button type= "button" class="btn round-button" >
                 <img src="assets/search.png" alt="Search" title="Search">
               </button>
             </div>
@@ -65,7 +67,7 @@
                 <th [ngStyle]="{'color':'white',
                 'font-family': 'Courier New',
                 'font-size': '15px'}"><input type="checkbox" class="custom-checkbox"
-                (click)="deleteall()" >  </th>
+                (change)="deleteall($event)" >  </th>
                
                 <th class="table-col">
                     <button class="sort-button" (click)="sort_clicked('roll_no')">
@@ -121,7 +123,8 @@
                 </div>
             
         </ng-container>
-            <tr *ngFor="let info of student_details; let i = index" class="student-row">
+        
+        <tr *ngFor="let info of (search_input ? filteredData : student_details); let i = index" class="student-row">
                 <ng-container *ngIf="edit_student_roll == info.roll_no; else viewRow">
                         <td ></td>
                         <td><input type="number" formControlName="roll_no" [ngModel]="info_pass_template.roll_no"></td>
@@ -144,15 +147,16 @@
                 </ng-container>
                 <ng-template #viewRow>
                     
-                    <td class="empty-td"><input class="custom-checkbox" type="checkbox" (click)="checked(info.roll_no)"></td>
-                    <td class="student-row">{{info.roll_no }}</td>
+                    <td class="empty-td"><input class="custom-checkbox" [checked]="isSelected"  type="checkbox" (click)="checked(info.roll_no)"></td>
+                    <td class="student-row">{{info.roll_no }} </td>
                     <td class="student-row">{{ info.name }}</td>
                     <td class="student-row">{{ info.class }}</td>
                     <td class="student-row">{{ info.section }}</td>
                     <td class="student-row">{{ info.class_teacher }}</td>
                     <td class="student-row">{{ info.age }}</td>
+                    
                     <td>
-                        <button class="btn center-button" (click)="edit_info(info.roll_no)">
+                        <button class="btn center-button"   (click)="edit_info(info.roll_no)">
                             <img src="assets/8542056_edit_write_icon.png" alt="Edit Icon" title="Edit Info" width="20" height="20">
                         </button>   
                         <button  class="btn center-button" (click)="delete_info(info.roll_no)">

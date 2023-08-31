@@ -1,7 +1,9 @@
-import { Component,OnInit,ChangeDetectorRef  } from '@angular/core';
+import { Component,OnInit,Input,ChangeDetectorRef  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StudentService } from '../service/student.service';
 import {Student} from '../models/student.model'
+import { FormControl } from '@angular/forms';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-test',
@@ -9,6 +11,8 @@ import {Student} from '../models/student.model'
   styleUrls: ['./test.component.css']
 })
 export class TestComponent {
+  @Input() student_details_input: any[] = [];
+  searchControl: FormControl = new FormControl('');
   edit_student_info=false
   studentForm: FormGroup;
   addStudentForm: FormGroup;
@@ -92,6 +96,166 @@ export class TestComponent {
         "class_teacher": "Mr. Rodriguez",
         "class": 11,
         "section": "C"
+      },
+      {
+        "roll_no": 101,
+        "name": "Sarah Johnson",
+        "age": 16,
+        "class_teacher": "Mr. Anderson",
+        "class": 10,
+        "section": "A"
+      },
+      {
+        "roll_no": 102,
+        "name": "John Smith",
+        "age": 15,
+        "class_teacher": "Mrs. Williams",
+        "class": 9,
+        "section": "B"
+      },
+      {
+        "roll_no": 103,
+        "name": "Emily Brown",
+        "age": 17,
+        "class_teacher": "Mr. Davis",
+        "class": 11,
+        "section": "A"
+      },
+      {
+        "roll_no": 104,
+        "name": "Michael Miller",
+        "age": 14,
+        "class_teacher": "Miss Wilson",
+        "class": 8,
+        "section": "C"
+      },
+      {
+        "roll_no": 105,
+        "name": "Sophia Martinez",
+        "age": 15,
+        "class_teacher": "Mr. Thompson",
+        "class": 10,
+        "section": "B"
+      },
+      {
+        "roll_no": 106,
+        "name": "Ethan Harris",
+        "age": 16,
+        "class_teacher": "Mrs. Martin",
+        "class": 11,
+        "section": "C"
+      },
+      {
+        "roll_no": 107,
+        "name": "Olivia Taylor",
+        "age": 14,
+        "class_teacher": "Mr. Jackson",
+        "class": 9,
+        "section": "A"
+      },
+      {
+        "roll_no": 108,
+        "name": "Ava Anderson",
+        "age": 15,
+        "class_teacher": "Miss Garcia",
+        "class": 10,
+        "section": "B"
+      },
+      {
+        "roll_no": 109,
+        "name": "William Wilson",
+        "age": 16,
+        "class_teacher": "Mrs. Lee",
+        "class": 11,
+        "section": "C"
+      },
+      {
+        "roll_no": 110,
+        "name": "Liam Hernandez",
+        "age": 15,
+        "class_teacher": "Mr. Robinson",
+        "class": 10,
+        "section": "A"
+      },
+      {
+        "roll_no": 111,
+        "name": "Emma Davis",
+        "age": 16,
+        "class_teacher": "Mrs. Moore",
+        "class": 11,
+        "section": "B"
+      },
+      {
+        "roll_no": 112,
+        "name": "Noah Thompson",
+        "age": 14,
+        "class_teacher": "Mr. White",
+        "class": 9,
+        "section": "C"
+      },
+      {
+        "roll_no": 113,
+        "name": "Isabella Adams",
+        "age": 15,
+        "class_teacher": "Miss Hall",
+        "class": 10,
+        "section": "A"
+      },
+      {
+        "roll_no": 114,
+        "name": "Mason Brown",
+        "age": 16,
+        "class_teacher": "Mr. Johnson",
+        "class": 11,
+        "section": "B"
+      },
+      {
+        "roll_no": 115,
+        "name": "Oliver Martinez",
+        "age": 14,
+        "class_teacher": "Mrs. Thomas",
+        "class": 9,
+        "section": "C"
+      },
+      {
+        "roll_no": 116,
+        "name": "Sophie Wilson",
+        "age": 15,
+        "class_teacher": "Miss Jackson",
+        "class": 10,
+        "section": "A"
+      },
+      {
+        "roll_no": 117,
+        "name": "Lucas Garcia",
+        "age": 16,
+        "class_teacher": "Mr. Anderson",
+        "class": 11,
+        "section": "B"
+      },
+      {
+        "roll_no": 118,
+        "name": "Amelia Lee",
+        "age": 14,
+        "class_teacher": "Mrs. Davis",
+        "class": 9,
+        "section": "C"
+      },
+      {
+        "roll_no": 119,
+        "name": "Jackson Moore",
+        "age": 15,
+        "class_teacher": "Mr. Robinson",
+        "class": 10,
+        "section": "A"
+      },
+      {
+        "roll_no": 120,
+        "name": "Lily Hall",
+        "age": 16,
+        "class_teacher": "Miss Williams",
+        "class": 11,
+        "section": "B"
       }
     ]
     //student_details:Student[]=[]
@@ -118,9 +282,19 @@ export class TestComponent {
       
     
     }
+    filteredStudentDetails:any = []
     ngOnInit(){
       
       this.get_student()
+      
+    }
+    filterStudentDetails(searchText: string) {
+      searchText = searchText.toLowerCase();
+      this.filteredStudentDetails = this.student_details.filter(
+        student => 
+          student.roll_no.toString().includes(searchText) ||
+          student.name.toLowerCase().includes(searchText)
+      );
     }
     add_student:boolean=false
     edit_student_roll: number |null=null;
@@ -279,101 +453,154 @@ export class TestComponent {
           // this.get_student()
          
         }
-        showDelete = false;
+    showDelete = false;
 
-        showDeleteOption() {
-          this.showDelete = true;
-        }
+    showDeleteOption() {
+      this.showDelete = true;
+    }
       
-        hideDeleteOption() {
-          this.showDelete = false;
+    hideDeleteOption() {
+      this.showDelete = false;
+    }
+    
+    sortde:Student[]=[]
+    
+    
+    sortData(col_Name:any,type:any){
+      console.log(col_Name,type)
+      
+      if (col_Name=="roll_no"){
+        if (type==true){
+            this.student_details=this.student_details.sort((a,b)=>b.roll_no-a.roll_no)
+            console.log("roll_no is clicked",type)
         }
-        deleteall(){
-          
-        }
-        sortde:Student[]=[]
-        
-        
-        sortData(col_Name:any,type:any){
-          console.log(col_Name,type)
-          
-          if (col_Name=="roll_no"){
-            if (type==true){
-                this.student_details=this.student_details.sort((a,b)=>b.roll_no-a.roll_no)
+        else if (type==false){
+                this.student_details=this.student_details.sort((a,b)=>a.roll_no-b.roll_no)
                 console.log("roll_no is clicked",type)
-            }
-            else if (type==false){
-                    this.student_details=this.student_details.sort((a,b)=>a.roll_no-b.roll_no)
-                    console.log("roll_no is clicked",type)
-                  }
+              }
+      }
+      if (col_Name=='name'){
+        if (type==true){
+          this.student_details=this.student_details.sort((a,b)=>b.name.localeCompare(a.name))
+          console.log("name is clicked",type)
+        }
+        else if (type==false){
+          this.student_details=this.student_details.sort((a,b)=>a.name.localeCompare(b.name))
+          console.log("name is clicked",type)
+        }
+        }
+        if (col_Name=='class'){
+          if (type==true){
+            this.student_details=this.student_details.sort((a,b)=>b.class-a.class)
+            console.log("class is clicked",type)
           }
-          if (col_Name=='name'){
+          else if (type==false){
+            this.student_details=this.student_details.sort((a,b)=>a.class-b.class)
+            console.log("class is clicked",type)
+          }
+          }
+          if (col_Name=='section'){
             if (type==true){
-              this.student_details=this.student_details.sort((a,b)=>b.name.localeCompare(a.name))
-              console.log("name is clicked",type)
+              this.student_details=this.student_details.sort((a,b)=>b.section.localeCompare(a.section))
+              console.log("section is clicked",type)
             }
             else if (type==false){
-              this.student_details=this.student_details.sort((a,b)=>a.name.localeCompare(b.name))
-              console.log("name is clicked",type)
+              this.student_details=this.student_details.sort((a,b)=>a.section.localeCompare(b.section))
+              console.log("section is clicked",type)
             }
             }
-            if (col_Name=='class'){
+            if (col_Name=='class_teacher'){
               if (type==true){
-                this.student_details=this.student_details.sort((a,b)=>b.class-a.class)
-                console.log("class is clicked",type)
+                this.student_details=this.student_details.sort((a,b)=>b.class_teacher.localeCompare(a.class_teacher))
+                console.log("section is clicked",type)
               }
               else if (type==false){
-                this.student_details=this.student_details.sort((a,b)=>a.class-b.class)
-                console.log("class is clicked",type)
+                this.student_details=this.student_details.sort((a,b)=>a.class_teacher.localeCompare(b.class_teacher))
+                console.log("section is clicked",type)
               }
               }
-              if (col_Name=='section'){
+              if (col_Name=='age'){
                 if (type==true){
-                  this.student_details=this.student_details.sort((a,b)=>b.section.localeCompare(a.section))
+                  this.student_details=this.student_details.sort((a,b)=>b.age-(a.age))
                   console.log("section is clicked",type)
                 }
                 else if (type==false){
-                  this.student_details=this.student_details.sort((a,b)=>a.section.localeCompare(b.section))
+                  this.student_details=this.student_details.sort((a,b)=>a.age-(b.age))
                   console.log("section is clicked",type)
                 }
                 }
-                if (col_Name=='class_teacher'){
-                  if (type==true){
-                    this.student_details=this.student_details.sort((a,b)=>b.class_teacher.localeCompare(a.class_teacher))
-                    console.log("section is clicked",type)
-                  }
-                  else if (type==false){
-                    this.student_details=this.student_details.sort((a,b)=>a.class_teacher.localeCompare(b.class_teacher))
-                    console.log("section is clicked",type)
-                  }
-                  }
-                  if (col_Name=='age'){
-                    if (type==true){
-                      this.student_details=this.student_details.sort((a,b)=>b.age-(a.age))
-                      console.log("section is clicked",type)
-                    }
-                    else if (type==false){
-                      this.student_details=this.student_details.sort((a,b)=>a.age-(b.age))
-                      console.log("section is clicked",type)
-                    }
-                    }
-  
-        }
-        descending=false
-        sort_clicked(col_Name:string){
-          this.descending=!this.descending
-          console.log(this.descending)
-          this.sortData(col_Name,this.descending)
-        }
-        search=false
-        searchText: string = '';
 
-        searchStudents(){
-          this.search=true
-          console.log(this.searchText)
-          console.log(this.search)
-        }
-        clearSearch(){
-          
-        }
+    }
+    descending=false
+    sort_clicked(col_Name:string){
+      this.descending=!this.descending
+      console.log(this.descending)
+      this.sortData(col_Name,this.descending)
+    }
+    
+
+    
+    clearSearch(){
+      
+    }
+
+
+    isSelected=false
+    uncheck(){
+      this.list_delete=[]
+    }
+
+    check(){
+      this.student_details.forEach((value)=>{
+        this.list_delete.push(value.roll_no)
+      })
+    }
+    deleteall(event:any){
+      this.isSelected=!this.isSelected
+      console.log(this.isSelected)
+      if (this.isSelected==true){
+        this.check()
+      }
+      else{
+        this.uncheck()
+      }
+      console.log(this.list_delete)
+    }
+    search=false
+    searchText: string = '';
+    filter(roll_no:number){
+      console.log(roll_no)
+    }
+    searchStudents(searchText:string){
+      this.search=true
+      // console.log(this.searchText)
+      this.student_details=this.student_details.filter((value)=>
+        value.name.toLowerCase().includes(searchText))
+    }
+
+    // searchText: string = '';
+
+  // handleSearchInput() {
+  //   const words = this.searchText.split(' ');
+  //   console.log('Entered words:', words);
+  // }
+  filteredData: any = [];
+  search_input=false
+  handleSearchInput() {
+    
+    
+    this.filteredData = this.student_details.filter(item =>
+      item.name.toLowerCase().includes(this.searchText.toLowerCase())
+    );
+    
+    console.log(this.student_details,"Student details")
+    console.log(this.filteredData,"Filterd")
+  }
+  handleKeyDown(event: KeyboardEvent) {
+    
+      this.search_input=true
+  }
+  
+    
+  
 }
