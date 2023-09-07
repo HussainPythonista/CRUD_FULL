@@ -42,8 +42,8 @@
             <div class="search-right">
             
               <input
-                type="text" (ngModelChange)="handleSearchInput()" 
-                [(ngModel)]="searchText" (keydown)="handleKeyDown($event)"
+                type="text" (keydown)="handleKeyDown($event)" 
+                [(ngModel)]="searchText" 
                 placeholder="Search by Roll No or Name"
                 id="input-box"
                 class="custom-input round-input" >
@@ -114,7 +114,7 @@
             <td><input type="text" placeholder="Age" formControlName="age"></td>
             <td>
                 <div class="button-container">
-                    <button class="btn center-button"  (click)="save_edit()">
+                    <button class="btn center-button"  (click)="add_student">
                         <img src="assets\8666542_save_icon.png" alt="Edit Icon" width="20" height="20"></button>
                     <button class="btn center-button"  (click)="cancel_add()">
                         <img  src="assets\4781838_cancel_close_delete_exit_logout_icon.png" alt="Edit Icon" width="20" height="20">
@@ -148,7 +148,7 @@
                 <ng-template #viewRow>
                     
                     <td class="empty-td"><input class="custom-checkbox" [checked]="isSelected"  type="checkbox" (click)="checked(info.roll_no)"></td>
-                    <td class="student-row">{{info.roll_no }} </td>
+                    <td class="student-row">{{ info.roll_no }} </td>
                     <td class="student-row">{{ info.name }}</td>
                     <td class="student-row">{{ info.class }}</td>
                     <td class="student-row">{{ info.section }}</td>
@@ -160,8 +160,8 @@
                             <img src="assets/8542056_edit_write_icon.png" alt="Edit Icon" title="Edit Info" width="20" height="20">
                         </button>   
                         <button  class="btn center-button" (click)="delete_info(info.roll_no)">
-                            <img src="assets/3669361_delete_ic_icon.png" alt="Edit Icon" width="20" height="20"
-                            title="Delete Info"></button>
+                            <img src="assets/3669361_delete_ic_icon.png" alt="Edit Icon" 
+                            width="20" height="20" title="Delete Info"></button>
                     </td>
                 </ng-template>
             </tr>

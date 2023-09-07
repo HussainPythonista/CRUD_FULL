@@ -282,7 +282,8 @@ export class TestComponent {
       
     
     }
-    filteredStudentDetails:any = []
+    
+    filteredStudentDetails:Student[] = []
     ngOnInit(){
       
       this.get_student()
@@ -295,16 +296,15 @@ export class TestComponent {
           student.roll_no.toString().includes(searchText) ||
           student.name.toLowerCase().includes(searchText)
       );
+      
     }
     add_student:boolean=false
     edit_student_roll: number |null=null;
-
     info_pass_template:any;
 
     edit_info(roll_no:number){
       if (this.add_student==false){
         console.log(roll_no)
-
         this.edit_student_info=true
         console.log(this.edit_student_info)
         this.info_pass_template=this.student_details.find((student)=>student.roll_no==roll_no)
@@ -334,14 +334,10 @@ export class TestComponent {
       }
       
       else{
-        
         this.cancel_edit()
         this.add_student_info()
-      }
-      
-      
+      } 
     }
-    
     
     get_student(){
       this.studentService.getAllStudents().subscribe(
@@ -439,18 +435,16 @@ export class TestComponent {
       this.add_student=false
     }
     save_edit(){
-          console.log("save_edit",this.studentForm.value)
+        console.log("save_edit!!!",this.studentForm.value)
+        if (this.studentForm.valid){
+          console.log("Sucess")
+        }
+        else{
+          console.log("invalid")
+        }
           
-          // const patch_value={name:this.addStudentForm.value.name,
-          // roll_no:this.addStudentForm.value.roll_no,
-          // section:this.addStudentForm.value.section,
-          // class_teacher:this.addStudentForm.value.class_teacher,
-          // age:this.addStudentForm.value.age,
-          // class:this.addStudentForm.value.class}
-          this.edit_student_info = false; // Exit editing mode
-          this.edit_student_roll = null;  // Clear the flag
-          // this.changeDetector.detectChanges()
-          // this.get_student()
+        this.edit_student_info = false; // Exit editing mode
+        this.edit_student_roll = null;  // Clear the flag
          
         }
     showDelete = false;
@@ -471,64 +465,122 @@ export class TestComponent {
       
       if (col_Name=="roll_no"){
         if (type==true){
+          if (this.search_input==true){
+            this.filteredData=this.filteredData.sort((a,b)=>b.roll_no-a.roll_no)
+          }
+          else{
             this.student_details=this.student_details.sort((a,b)=>b.roll_no-a.roll_no)
             console.log("roll_no is clicked",type)
+          }
         }
         else if (type==false){
-                this.student_details=this.student_details.sort((a,b)=>a.roll_no-b.roll_no)
+          if (this.search_input==true){
+            this.filteredData=this.filteredData.sort((a,b)=>a.roll_no-b.roll_no)
+          }
+          else{this.student_details=this.student_details.sort((a,b)=>a.roll_no-b.roll_no)
                 console.log("roll_no is clicked",type)
               }
+            }
       }
       if (col_Name=='name'){
         if (type==true){
+          if (this.search_input==true){
+            this.filteredData=this.filteredData.sort((a,b)=>b.name.localeCompare(a.name))
+          }
+          else{
           this.student_details=this.student_details.sort((a,b)=>b.name.localeCompare(a.name))
           console.log("name is clicked",type)
+          }
         }
         else if (type==false){
+          if (this.search_input==true){
+            this.filteredData=this.filteredData.sort((a,b)=>a.name.localeCompare(b.name))
+          }
+          else{
           this.student_details=this.student_details.sort((a,b)=>a.name.localeCompare(b.name))
           console.log("name is clicked",type)
+          }
         }
         }
-        if (col_Name=='class'){
-          if (type==true){
-            this.student_details=this.student_details.sort((a,b)=>b.class-a.class)
-            console.log("class is clicked",type)
+      if (col_Name=='class'){
+        if (type==true){
+          if (this.search_input==true){
+            this.filteredData=this.filteredData.sort((a,b)=>b.class-a.class)
           }
-          else if (type==false){
-            this.student_details=this.student_details.sort((a,b)=>a.class-b.class)
-            console.log("class is clicked",type)
+          else{
+          this.student_details=this.student_details.sort((a,b)=>b.class-a.class)
+          console.log("class is clicked",type)
+        }
+        }
+        else if (type==false){
+          if (this.search_input==true){
+            this.filteredData=this.filteredData.sort((a,b)=>a.class-b.class)
           }
+          this.student_details=this.student_details.sort((a,b)=>a.class-b.class)
+          console.log("class is clicked",type)
+        }
+        }
+      if (col_Name=='section'){
+        if (type==true){
+          if (this.search_input==true){
+            this.filteredData=this.filteredData.sort((a,b)=>b.class-a.class)
           }
-          if (col_Name=='section'){
-            if (type==true){
-              this.student_details=this.student_details.sort((a,b)=>b.section.localeCompare(a.section))
-              console.log("section is clicked",type)
-            }
-            else if (type==false){
-              this.student_details=this.student_details.sort((a,b)=>a.section.localeCompare(b.section))
-              console.log("section is clicked",type)
-            }
-            }
-            if (col_Name=='class_teacher'){
-              if (type==true){
-                this.student_details=this.student_details.sort((a,b)=>b.class_teacher.localeCompare(a.class_teacher))
-                console.log("section is clicked",type)
-              }
-              else if (type==false){
-                this.student_details=this.student_details.sort((a,b)=>a.class_teacher.localeCompare(b.class_teacher))
-                console.log("section is clicked",type)
-              }
-              }
-              if (col_Name=='age'){
-                if (type==true){
-                  this.student_details=this.student_details.sort((a,b)=>b.age-(a.age))
-                  console.log("section is clicked",type)
-                }
-                else if (type==false){
-                  this.student_details=this.student_details.sort((a,b)=>a.age-(b.age))
-                  console.log("section is clicked",type)
-                }
-                }
+          else{
+            this.student_details=this.student_details.sort((a,b)=>b.section.localeCompare(a.section))
+            console.log("section is clicked",type)
+          }
+          
+        }
+        else if (type==false){
+          if (this.search_input==true){
+            this.filteredData=this.filteredData.sort((a,b)=>a.section.localeCompare(b.section))
+          }
+          this.student_details=this.student_details.sort((a,b)=>a.section.localeCompare(b.section))
+          console.log("section is clicked",type)
+        }
+        }
+      if (col_Name=='class_teacher'){
+        if (type==true){
+          if (this.search_input==true){
+            this.filteredData=this.filteredData.sort((a,b)=>b.class_teacher.localeCompare(a.class_teacher))
+          }
+          else{
+            this.student_details=this.student_details.sort((a,b)=>b.class_teacher.localeCompare(a.class_teacher))
+            console.log("section is clicked",type)
+          }
+          
+        }
+        else if (type==false){
+          if (this.search_input==true){
+            this.student_details=this.student_details.sort((a,b)=>a.class_teacher.localeCompare(b.class_teacher))
+            console.log("section is clicked",type)
+          }
+
+          
+        }
+        }
+      if (col_Name=='age'){
+        if (type==true){
+          if (this.search_input==true){
+            this.filteredData=this.filteredData.sort((a,b)=>b.age-(a.age))
+          }
+          else{
+            this.student_details=this.student_details.sort((a,b)=>b.age-(a.age))
+            console.log("section is clicked",type)
+          }
+          
+        }
+        else if (type==false){
+          if (this.search_input==true){
+            this.filteredData=this.filteredData.sort((a,b)=>a.age-(b.age))
+          }
+          else{
+            this.student_details=this.student_details.sort((a,b)=>a.age-(b.age))
+            console.log("section is clicked",type)
+          }
+          
+        }
+        }
 
     }
     descending=false
@@ -584,21 +636,45 @@ export class TestComponent {
   //   const words = this.searchText.split(' ');
   //   console.log('Entered words:', words);
   // }
-  filteredData: any = [];
+  lettersOnly(keyCode:any){
+    const charCode=keyCode
+    if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123)  || charCode==32)
+
+          return true;
+    else
+          return false;
+  }
+  filteredData: Student[] = [];
   search_input=false
-  handleSearchInput() {
-    
-    
+  handleSearchInput(txt:any) {
+    console.log(txt)
+    if (this.search_input==true){
     this.filteredData = this.student_details.filter(item =>
-      item.name.toLowerCase().includes(this.searchText.toLowerCase())
+      item.name.toLowerCase().includes(txt.toLowerCase())
     );
-    
+  }
     console.log(this.student_details,"Student details")
     console.log(this.filteredData,"Filterd")
-  }
-  handleKeyDown(event: KeyboardEvent) {
     
+  }
+  text_search=""
+  handleKeyDown(event: KeyboardEvent) {
+      console.log("key Pressed",event)
       this.search_input=true
+      const key_code=event.keyCode
+      
+      const isLetter=this.lettersOnly(key_code)
+
+      if (isLetter==false){
+        if (key_code==8){
+        this.text_search=this.text_search.slice(0, -1)}
+        }
+        else {
+          this.text_search+=event.key
+        }
+      console.log("key Pressed",this.text_search)
+      this.handleSearchInput(this.text_search)
+      
   }
   
     

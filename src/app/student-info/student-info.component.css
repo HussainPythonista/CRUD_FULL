@@ -1,176 +1,348 @@
 body {
-    border-radius: 5px;
-    background: #FFF;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: #007bff;
-    /* padding: 12px;
-    font-family: 'Times new Roman', sans-serif;
-    margin: 0;
-    background: black;  */
+    
+  background: #FFF;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #007bff;
+  /* padding: 12px;
+  font-family: 'Times new Roman', sans-serif;
+  margin: 0;
+  background: black;  */
 }
 table tr:nth-child(even) {
-    background-color: #FFFFFF; /* White background color */
+  background-color: #FFFFFF; /* White background color */
+  color: #7a3fb5;
+}
+table tr:nth-child(odd) {
+
+color: #FFFFFF;
 }
 table {
-    border-collapse: collapse;
-    width: 100%;
-    /* background-image: linear-gradient(to left, #553c9a, #b393d3);
-    font-size: 70px; */
-    font-weight: 600;
-    /* background-image: linear-gradient(to left, #553c9a, #b393d3); */
-    color: black;
-    background-clip: text;
-    -webkit-background-clip: text;
-    background: linear-gradient(to right, #FF6B6B, #3F51B5);
-    
+  border-collapse: collapse;
+  width: 100%;
+  /* background-image: linear-gradient(to left, #553c9a, #b393d3);
+  font-size: 70px; */
+  font-weight: 600;
+  /* background-image: linear-gradient(to left, #553c9a, #b393d3); */
+  color: black;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background: linear-gradient(to right, #FF6B6B, #3F51B5);
+  
 }
 .custom-checkbox {
-    transform: scale(1.2); /* Adjust the scale value to increase the size */
-    color: white;
-    padding: 4px 2px
+  transform: scale(1.2); /* Adjust the scale value to increase the size */
+  color: white;
+  padding: 4px 2px
 }
 
 .data-table th,
-    .data-table td {
-        border-bottom: 1px solid black;
-        padding: 8px;
-    }
-    /* Adjust padding for the checkbox column */
-    .data-table .checkbox-cell {
-        padding: 4px;
-    }
+  .data-table td {
+      border-bottom: 1px solid black;
+      padding: 8px;
+  }
+  /* Adjust padding for the checkbox column */
+  .data-table .checkbox-cell {
+      padding: 4px;
+  }
 /* Set a fixed width for all td elements */
 .fixed-width-td {
-    width: 100px; /* Adjust this value as needed */
+  width: 100px; /* Adjust this value as needed */
 }
 
 /* Class for editing mode */
 .editing-mode td {
-    width: 100px; /* Adjust this value as needed */
+  width: 100px; /* Adjust this value as needed */
 }
 /* .empty-td {
-    vertical-align: middle;
-    width: 40px; /* Adjust this value as needed 
-    
-    height: 30px;
+  vertical-align: middle;
+  width: 40px; /* Adjust this value as needed 
+  
+  height: 30px;
 } */
 
 input[type="number"], input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    transition: border-color 0.3s ease;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
 }
 
 input[type="number"]:focus, input[type="text"]:focus {
-    border-color: #007bff;
-    outline: none;
+  border-color: #007bff;
+  outline: none;
 }
 
 .student-row {
-    transition: transform 0.3s ease;
-  }
-  
-  /* Apply zoom-in effect on hover */
+  transition: transform 0.3s ease;
+}
+
+/* Apply zoom-in effect on hover */
 .student-row:hover {
-    transform: scale(1.01); /* You can adjust the scale value */
-  }
+  transform: scale(1.01); /* You can adjust the scale value */
+}
 /* Basic button styling */
 .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    background-color: #3498db; /* Set your preferred background color */
-    color: #fff; /* Set the text color */
-    transition: background-color 0.3s, color 0.3s;
-  }
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  /* Set your preferred background color */
+  color: #fff; /* Set the text color */
   
-  /* Button hover effect */
-  .btn:hover {
-    background-color: whitesmoke /* Change background color on hover */
-  }
-  .save-btn{
-    background-color: black;
-  }
-  /* Center the button */
-  .center-button {
-    text-align: center;
-  }
   
+}
+
+/* Button hover effect */
+.btn:hover {
+   /* Change background color on hover */
+}
+.save-btn{
+  /* background-color: black; */
+}
+#dummy{
+  
+  padding-left: 20%;
+}
+/* Center the button */
 .center-button {
-    width: 30%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    transition: border-color 0.3s ease;
-    background: white;
-    width: fit-content;
+  text-align: center;
+  
+}
+
+.center-button {
+  width: 30%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+  background: white;
+  width: fit-content;
 }
 .delete-button{
-    width: 30%;
-    padding: 10px;
-    
-    border-radius: 4px;
-    font-size: 14px;
-    transition: border-color 0.3s ease;
-    width: fit-content;
+  width: 30%;
+  padding: 10px;
+  
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+  width: fit-content;
 }
 .column-header {
-    /* background-color: #f2f2f2; */
-    padding: 10px;
-    text-align: left;
-    font-weight: bold;
-    color: #333;
-  }
-  .data-table {
-    border-collapse: collapse;
-    width: 100%;
-    border: 1px solid #ddd;
-  }
+  /* background-color: #f2f2f2; */
+  padding: 10px;
+  text-align: left;
+  font-weight: bold;
+  color: #333;
+}
+.data-table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  align-items: left;
+ 
+}
 
-  .column-header:hover {
-    background-color: #e0e0e0;
-  }
+.column-header:hover {
+  background-color: #e0e0e0;
+}
 
 .table-col{
-    color: white;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 20px;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 30px;
 }
 
 .data-table th {
-    background-color: #555;
-    color: white;
+  background: white;
+  color: black;
+  font-family:  'Comfortaa', sans-serif;
+  font-size: 15px;
+  align-items: left;
+  padding-left: -30px;
 }
-  
+
 header h1 {
-    font-size: 70px;
-    font-weight: 600;
-    background-image: linear-gradient(to left, #553c9a, #b393d3);
-    color: beige;
-    background-clip: text;
-    -webkit-background-clip: text;
-    
-  }
-  .gradient-header {
-    background: linear-gradient(to right, #FF6B6B, #3F51B5); /* Adjust gradient colors */
-    padding: 5px;
-    text-align: center;
-    /* color: rgb(168, 26, 26); */
-    transition: background 0.3s ease; /* Smooth background color transition */
-    color: black;
-  }
+  font-size: 70px;
+  font-weight: 600;
+  background-image: linear-gradient(to left, #553c9a, #b393d3);
+  color: beige;
+  background-clip: text;
+  -webkit-background-clip: text;
   
-  .gradient-header:hover {
-    background: linear-gradient(to right, #3F51B5, #FF6B6B); /* Adjust hover gradient colors */
+}
+
+
+
+
+/* Add hover and focus styles to enhance user interaction */
+.custom-input:hover,
+.custom-input:focus {
+  border-color: darkpurple; /* Change the border color on hover and focus */
+  transform: scale(1.02); /* Slightly scale up on hover and focus */
+}
+
+.search-container {
+  display: flex;
+  align-items: left;
+  width: 30%; /* Set the width to 20% */
+   }
+  #input-search{
+    border: purple solid 2px;
+    /* border-radius: 15px; */
   }
+
+  .button-container{
+    display: flex;
+   
+    flex-direction: row;
+    align-items: center; /* Horizontally center items */
+  }
+ 
+
+.center-button-container {
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  margin-top: 10px; /* Adjust margin as needed */
+  padding-left: 100;
+}
+
+#delete-selected{
+
+margin-left: 20px;
+}
+
+.sort-button {
+
+background-color: white;
+border: 1px solid white;
+padding: 0;
+cursor: pointer;
+font-size: 16px;
+color: white;
+transition: color 0.3s;
+}
+
+
+
+/* Optional: Style the icon directly */
+.sort-button i {
+margin: 0 5px;
+}
+
+.center {
+display: flex;
+justify-content: center;
+align-items: center;
+padding-top: 0.5px;
+}
+header{
+background-color: #f2f2f2;
+height:138px;
+}
+.header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+width: 100%;
+height: 70px;
+padding: 20px;
+margin-top: 20px;
+
+}
+
+.custom-input {
+  border: #3F51B5 2px solid;
+  background: #333;
+  border-radius: 100px;
+  width: calc(100% - 40px); /* Adjust based on your button width and spacing */
+  margin-right: 10px;
+}
+
+
+.round-button {
   
+background: none;
+border: none;
+padding: 0;
+cursor: pointer;
+
+}
+
+.round-button img {
+margin-top: 7px;
+width: 20px;
+height: auto;
+
+padding: 0;
+margin-bottom: 10px;
+}
+#input-box{
+border: 1px solid ;
+border-radius: 30px;
+height: 35px;
+width: 200px;
+}
+#input-box::placeholder {
+font-size: 13px; /* You can adjust this value to your preference */
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.header-info{
+ font-family: 'Comfortaa', sans-serif;
+ font-weight: bold;
+ margin-left: 35% ;
+ color: black;
+ 
+}
+.search-bar {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 10px;
+background-color: #f2f2f2;
+padding-bottom: 10px;
+margin-top: -8px;
+}
+
+
+.custom-input {
+background: white;
+border: 1px solid #ccc;
+border-radius: 25px;
+margin-right: 5.5px;
+flex: 1;
+
+}
+.search-right{
+display: flex;
+
+}
+
+.green-text {
+  color: green;
+}
+
+.red-text {
+  color: red;
+}
+
+.round-button:active {
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.add_button_align{
+background: green;
+}
+.combined-add_trash{
+background: white;
+border: 0.5px white solid;
+border-radius: 10px;
+height: 40px;
+}
