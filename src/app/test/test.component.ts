@@ -653,11 +653,11 @@ export class TestComponent {
     console.log(txt)
     if (this.search_input==true){
     this.filteredData = this.student_details.filter((item) =>
-      item.name.toLowerCase().includes(txt.toLowerCase())
+      item.roll_no.toString().includes(txt)
     );
   }
-    console.log(this.student_details,"Student details")
-    console.log(this.filteredData,"Filterd")
+    // console.log(this.student_details,"Student details")
+    // console.log(this.filteredData,"Filterd")
     
   }
   
@@ -668,17 +668,18 @@ export class TestComponent {
       item.name.toLowerCase().includes(txt.toLowerCase())
     );
   }
-    console.log(this.student_details,"Student details")
-    console.log(this.filteredData,"Filterd")
+    //console.log(this.student_details,"Student details")
+    //console.log(this.filteredData,"Filterd")
     
   }
   text_search=""
   handleKeyDown(event: KeyboardEvent) {
-      console.log("key Pressed",event)
+      //console.log("key Pressed",event)
       this.search_input=true
       const key_code=event.keyCode
       if (key_code >= 48 && key_code <= 57){
-        alert(true)
+        this.text_search+=event.key
+        this.numerical(this.text_search)
       }
       else{
       const isLetter=this.lettersOnly(key_code)
@@ -690,7 +691,7 @@ export class TestComponent {
         else {
           this.text_search+=event.key
         }
-      console.log("key Pressed",this.text_search)
+      //console.log("key Pressed",this.text_search)
       this.handleSearchInput(this.text_search)
       }
       
