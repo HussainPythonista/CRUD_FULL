@@ -123,8 +123,8 @@
                 </div>
             
         </ng-container>
-        
-        <tr *ngFor="let info of (search_input ? filteredData : student_details); let i = index" class="student-row">
+        <tr *ngFor="let info of (search_input ? filteredData : student_details) | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index" class="student-row">
+        <!-- <tr *ngFor="let info of (search_input ? filteredData : student_details); let i = index" class="student-row"> -->
                 <ng-container *ngIf="edit_student_roll == info.roll_no; else viewRow">
                         <td ></td>
                         <td><input type="number" formControlName="roll_no" [ngModel]="info_pass_template.roll_no"></td>
@@ -170,7 +170,11 @@
                 
             </tr>
         </table>
+        <!-- Add pagination controls -->
         
     </form>
+    <div class="pagination-container">
+        <pagination-controls (pageChange)="setPage($event)" class="pagination"></pagination-controls>
+    </div>
 </body>
 </html>

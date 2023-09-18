@@ -329,6 +329,11 @@ export class StudentInfoComponent implements OnInit {
     (A-Z or a-z) or a space character. It returns true if the key code represents a letter or 
     space and false otherwise.`
     const charCode=keyCode
+
+    if (charCode >= 48 && charCode <= 57) {
+      alert('input was 0-9');
+    }
+
     if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123)  || charCode==32)
 
           return true;
@@ -352,25 +357,31 @@ export class StudentInfoComponent implements OnInit {
   }
 
   // Log the original student details and the filtered data arrays for further debugging.
-  console.log(this.student_details, "Student details");
-  console.log(this.filteredData, "Filtered");
+  // console.log(this.student_details, "Student details");
+  // console.log(this.filteredData, "Filtered");
 }
 
   
-  
+  nums=""
   handleKeyDown(event: KeyboardEvent) {
     
     `The handleKeyDown function is responsible for handling keyboard events, 
      logging key presses, dynamically updating a search input field while filtering 
      out non-letter characters, and initiating a search based on the input text.`
 
-    console.log("Key Pressed", event);
+    //  isNaN(event.)
+    //console.log("Key Pressed", this.text_search);
+    console.log("Key Pressed", event.key);
     this.search_input = true;
     const key_code = event.keyCode;
-  
+    
     // Check if the key is a letter character or a space using the lettersOnly function.
     const isLetter = this.lettersOnly(key_code);
   
+    if (event.keyCode >= 48 && event.keyCode <= 57) {
+      alert('input was 0-9');
+    }
+    
     if (isLetter == false) {
       // If the key is not a letter and is the Backspace key, remove the last character from the search input.
       if (key_code == 8) {
@@ -381,10 +392,10 @@ export class StudentInfoComponent implements OnInit {
       this.text_search += event.key;
     }
   
-    console.log("Key Pressed", this.text_search);
+    // console.log("Key Pressed", this.text_search);
   
     // Trigger a search with the updated input.
-    this.handleSearchInput(this.text_search);
+    // this.handleSearchInput(this.text_search);
   
   }
 }

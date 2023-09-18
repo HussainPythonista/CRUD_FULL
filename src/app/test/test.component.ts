@@ -618,17 +618,20 @@ export class TestComponent {
       }
       console.log(this.list_delete)
     }
+
+
+
     search=false
     searchText: string = '';
     filter(roll_no:number){
       console.log(roll_no)
     }
-    searchStudents(searchText:string){
-      this.search=true
-      // console.log(this.searchText)
-      this.student_details=this.student_details.filter((value)=>
-        value.name.toLowerCase().includes(searchText))
-    }
+    // searchStudents(searchText:string){
+    //   this.search=true
+    //   // console.log(this.searchText)
+    //   this.student_details=this.student_details.filter((value)=>
+    //     value.name.toLowerCase().includes(searchText))
+    // }
 
     // searchText: string = '';
 
@@ -636,6 +639,8 @@ export class TestComponent {
   //   const words = this.searchText.split(' ');
   //   console.log('Entered words:', words);
   // }
+  filteredData: Student[] = [];
+  search_input=false
   lettersOnly(keyCode:any){
     const charCode=keyCode
     if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123)  || charCode==32)
@@ -644,12 +649,22 @@ export class TestComponent {
     else
           return false;
   }
-  filteredData: Student[] = [];
-  search_input=false
+  numerical(txt:any){
+    console.log(txt)
+    if (this.search_input==true){
+    this.filteredData = this.student_details.filter((item) =>
+      item.name.toLowerCase().includes(txt.toLowerCase())
+    );
+  }
+    console.log(this.student_details,"Student details")
+    console.log(this.filteredData,"Filterd")
+    
+  }
+  
   handleSearchInput(txt:any) {
     console.log(txt)
     if (this.search_input==true){
-    this.filteredData = this.student_details.filter(item =>
+    this.filteredData = this.student_details.filter((item) =>
       item.name.toLowerCase().includes(txt.toLowerCase())
     );
   }
@@ -662,9 +677,12 @@ export class TestComponent {
       console.log("key Pressed",event)
       this.search_input=true
       const key_code=event.keyCode
-      
+      if (key_code >= 48 && key_code <= 57){
+        alert(true)
+      }
+      else{
       const isLetter=this.lettersOnly(key_code)
-
+      
       if (isLetter==false){
         if (key_code==8){
         this.text_search=this.text_search.slice(0, -1)}
@@ -674,9 +692,21 @@ export class TestComponent {
         }
       console.log("key Pressed",this.text_search)
       this.handleSearchInput(this.text_search)
+      }
       
   }
+
+
+  p: number = 1; // Current page
+  itemsPerPage: number = 6; // Items per page (you can adjust this)
+
+  // ...
+
+  // Method to set the current page
+  setPage(page: number) {
+    this.p = page;
+  }
   
-    
+  
   
 }
