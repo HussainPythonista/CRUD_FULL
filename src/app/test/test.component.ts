@@ -287,7 +287,7 @@ export class TestComponent {
     ngOnInit(){
       
       this.get_student()
-      
+      this.handleSearchInput('');
     }
     filterStudentDetails(searchText: string) {
       searchText = searchText.toLowerCase();
@@ -650,7 +650,7 @@ export class TestComponent {
           return false;
   }
   numerical(txt:any){
-    console.log(txt)
+    console.log("entered",txt)
     if (this.search_input==true){
     this.filteredData = this.student_details.filter((item) =>
       item.roll_no.toString().includes(txt)
@@ -662,29 +662,22 @@ export class TestComponent {
   }
   
   handleSearchInput(txt:any) {
+    
     console.log(txt)
     if (this.search_input==true){
     this.filteredData = this.student_details.filter((item) =>
       item.name.toLowerCase().includes(txt.toLowerCase())
     );
+    
   }
-    //console.log(this.student_details,"Student details")
-    //console.log(this.filteredData,"Filterd")
+    
     
   }
   text_search=""
-  handleKeyDown(event: KeyboardEvent) {
-      //console.log("key Pressed",event)
-      this.search_input=true
-      const key_code=event.keyCode
-      if (key_code >= 48 && key_code <= 57){
-        this.text_search+=event.key
-        this.numerical(this.text_search)
-      }
-      else{
-      const isLetter=this.lettersOnly(key_code)
+  name_search(key_code:any,event:any){
+    const isLetter=this.lettersOnly(key_code)
       
-      if (isLetter==false){
+      if (isLetter==true){
         if (key_code==8){
         this.text_search=this.text_search.slice(0, -1)}
         }
@@ -693,21 +686,37 @@ export class TestComponent {
         }
       //console.log("key Pressed",this.text_search)
       this.handleSearchInput(this.text_search)
-      }
       
   }
-
-
-  p: number = 1; // Current page
-  itemsPerPage: number = 6; // Items per page (you can adjust this)
-
-  // ...
-
-  // Method to set the current page
-  setPage(page: number) {
-    this.p = page;
+  alpha_search:boolean=false
+  handleKeyDown(event: KeyboardEvent) {
+      //console.log("key Pressed",event)
+      this.search_input=true
+      const key_code=event.keyCode
+      const isLetter=this.lettersOnly(event.keyCode)
+      if (isLetter==true){
+        this.alpha_search=true
+        this.text_search+=event.key
+        this.handleSearchInput(this.text_search)
+      }
+      else{
+        if (key_code==8){
+          this.text_search=this.text_search.slice(0, -1)
+          if (this.alpha_search==true){this.handleSearchInput(this.text_search)}
+          if (this.alpha_search==false){this.numerical(this.text_search)}
+          
+        }
+        else{
+          if (key_code>=48 && key_code<=57){
+          this.text_search+=event.key
+          this.numerical(this.text_search)
+        }
+      }
+      
+    console.log(this.text_search)
   }
+
   
   
-  
+}
 }

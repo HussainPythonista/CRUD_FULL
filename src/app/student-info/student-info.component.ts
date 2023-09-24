@@ -330,9 +330,9 @@ export class StudentInfoComponent implements OnInit {
     space and false otherwise.`
     const charCode=keyCode
 
-    if (charCode >= 48 && charCode <= 57) {
-      alert('input was 0-9');
-    }
+    // if (charCode >= 48 && charCode <= 57) {
+    //   alert('input was 0-9');
+    // }
 
     if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123)  || charCode==32)
 
@@ -341,6 +341,15 @@ export class StudentInfoComponent implements OnInit {
           return false;
   }
   
+  numerical(txt:any){
+    console.log(txt)
+    if (this.search_input==true){
+    this.filteredData = this.student_details.filter((item) =>
+      item.roll_no.toString().includes(txt)
+    );
+    }
+  }
+
   handleSearchInput(txt: any) {
     `The handleSearchInput function is responsible for handling user input for searching student data. 
     It takes a txt parameter, which represents the text query entered by the user.`
@@ -362,7 +371,22 @@ export class StudentInfoComponent implements OnInit {
 }
 
   
-  nums=""
+
+
+  name_search(key_code:any,event:any){
+    const isLetter=this.lettersOnly(key_code)
+      
+      if (isLetter==false){
+        if (key_code==8){
+        this.text_search=this.text_search.slice(0, -1)}
+        }
+        else {
+          this.text_search+=event.key
+        }
+      //console.log("key Pressed",this.text_search)
+      this.handleSearchInput(this.text_search)
+      
+  }
   handleKeyDown(event: KeyboardEvent) {
     
     `The handleKeyDown function is responsible for handling keyboard events, 
@@ -378,24 +402,29 @@ export class StudentInfoComponent implements OnInit {
     // Check if the key is a letter character or a space using the lettersOnly function.
     const isLetter = this.lettersOnly(key_code);
   
-    if (event.keyCode >= 48 && event.keyCode <= 57) {
-      alert('input was 0-9');
+    if (key_code >= 48 && key_code <= 57){
+      this.text_search+=event.key
+      this.numerical(this.text_search)
     }
-    
-    if (isLetter == false) {
-      // If the key is not a letter and is the Backspace key, remove the last character from the search input.
-      if (key_code == 8) {
-        this.text_search = this.text_search.slice(0, -1);
-      }
-    } else {
-      // Append the letter key to the search input.
-      this.text_search += event.key;
+    else{
+      this.name_search(key_code,event)
     }
+}
   
     // console.log("Key Pressed", this.text_search);
   
     // Trigger a search with the updated input.
     // this.handleSearchInput(this.text_search);
   
+    p: number = 1; // Current page
+  itemsPerPage: number = 6; // Items per page (you can adjust this)
+
+  // ...
+
+  // Method to set the current page
+  setPage(page: number) {
+    this.p = page;
   }
+  
 }
+
