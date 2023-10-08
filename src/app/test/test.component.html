@@ -124,7 +124,7 @@
             
         </ng-container>
         <!-- <tr *ngFor="let info of (search_input ? filteredData : student_details) | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index" class="student-row"> -->
-            <tr *ngFor="let info of (search_input ? filteredData : student_details); let i = index" class="student-row">
+            <tr *ngFor="let info of (search_input ? filteredData : paginated_data); let i = index" class="student-row">
 
                 <ng-container *ngIf="edit_student_roll == info.roll_no; else viewRow">
                         <td ></td>

@@ -17,6 +17,31 @@ export class TestComponent {
   studentForm: FormGroup;
   addStudentForm: FormGroup;
   student_details=[
+    {
+      "roll_no": 201,
+        "name": "Karupaiah Johnson",
+        "age": 22,
+        "class_teacher": "Kuppusamy",
+        "class": 11,
+        "section": "K"
+    },
+    {
+      "roll_no": 222,
+        "name": "Kandasamy Robinson",
+        "age": 18,
+        "class_teacher": "Kuppusamy",
+        "class": 11,
+        "section": "R"
+    },
+    {
+      "roll_no": 184,
+        "name": "Murukesh Johnaton Appasamy",
+        "age": 10,
+        "class_teacher": "Ramaiah",
+        "class": 20,
+        "section": "H"
+    },
+    
       {
         "roll_no": 101,
         "name": "Sarah Johnson",
@@ -489,7 +514,7 @@ export class TestComponent {
             this.filteredData=this.filteredData.sort((a,b)=>b.name.localeCompare(a.name))
           }
           else{
-          this.student_details=this.student_details.sort((a,b)=>b.name.localeCompare(a.name))
+          this.paginated_data=this.paginated_data.sort((a,b)=>b.name.localeCompare(a.name))
           console.log("name is clicked",type)
           }
         }
@@ -498,7 +523,7 @@ export class TestComponent {
             this.filteredData=this.filteredData.sort((a,b)=>a.name.localeCompare(b.name))
           }
           else{
-          this.student_details=this.student_details.sort((a,b)=>a.name.localeCompare(b.name))
+          this.paginated_data=this.paginated_data.sort((a,b)=>a.name.localeCompare(b.name))
           console.log("name is clicked",type)
           }
         }
@@ -719,17 +744,29 @@ export class TestComponent {
         }
         }
       }
+    if (this.text_search.length==0){
+      this.generateButtons()
+      this.search=false
+    }
   }
   paginated_data:Student[]=[]
+  button_number:any=[]
   generateButtons() {
     const dataSize=this.student_details.length
     const numButtons = Math.ceil(dataSize / 4);
+    
+    
+
+    console.log(this.button_number)
+    
     const buttonContainer = document.getElementById("buttonContainer");
+
+
 
     if (buttonContainer) {
       buttonContainer.innerHTML = "";
 
-      for (let page_number = 1; page_number <= numButtons; page_number++) {
+      for (let page_number = 1; page_number < numButtons-1; page_number++) {
         const button = document.createElement("button");
         // page_number=page_number+1
         button.textContent = page_number.toString();
@@ -744,6 +781,10 @@ export class TestComponent {
           this.paginated_data=this.student_details.slice(start_number,end_number)
         });
         buttonContainer.appendChild(button);
+        if (page_number === 1) {
+          // Trigger a click event on button 1
+          button.click();
+        }
       }
     }
   }
