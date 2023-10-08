@@ -288,6 +288,7 @@ export class TestComponent {
       
       this.get_student()
       this.handleSearchInput('');
+      this.generateButtons();
     }
     filterStudentDetails(searchText: string) {
       searchText = searchText.toLowerCase();
@@ -691,7 +692,7 @@ export class TestComponent {
   alpha_search:boolean=false
   handleKeyDown(event: KeyboardEvent) {
     console.log(event.key,event.keyCode)
-
+    console.log("Length of Data",this.student_details.length)
     
       console.log("key Pressed",event)
       this.search_input=true
@@ -716,12 +717,35 @@ export class TestComponent {
           this.alpha_search==false
           this.numerical(this.text_search)
         }
+        }
+      }
+  }
+  paginated_data:Student[]=[]
+  generateButtons() {
+    const dataSize=this.student_details.length
+    const numButtons = Math.ceil(dataSize / 4);
+    const buttonContainer = document.getElementById("buttonContainer");
+
+    if (buttonContainer) {
+      buttonContainer.innerHTML = "";
+
+      for (let page_number = 1; page_number <= numButtons; page_number++) {
+        const button = document.createElement("button");
+        // page_number=page_number+1
+        button.textContent = page_number.toString();
+        button.addEventListener("click", () => {
+          // Handle button click here
+          // You can use this function to display data related to the clicked button.
+          // For example, you can display a subset of your data based on the button number.
+          console.log("Button clicked:", page_number); // Log the button number
+          const step=5
+          const start_number=(page_number-1)*5
+          const end_number=start_number+step
+          this.paginated_data=this.student_details.slice(start_number,end_number)
+        });
+        buttonContainer.appendChild(button);
       }
     }
-    console.log(this.text_search)
   }
-
-  
-
 }
 
