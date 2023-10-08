@@ -690,7 +690,10 @@ export class TestComponent {
   }
   alpha_search:boolean=false
   handleKeyDown(event: KeyboardEvent) {
-      //console.log("key Pressed",event)
+    console.log(event.key,event.keyCode)
+
+    
+      console.log("key Pressed",event)
       this.search_input=true
       const key_code=event.keyCode
       const isLetter=this.lettersOnly(event.keyCode)
@@ -705,18 +708,20 @@ export class TestComponent {
           if (this.alpha_search==true){this.handleSearchInput(this.text_search)}
           if (this.alpha_search==false){this.numerical(this.text_search)}
           
-        }
+      }
+    
         else{
           if (key_code>=48 && key_code<=57){
           this.text_search+=event.key
+          this.alpha_search==false
           this.numerical(this.text_search)
         }
       }
-      
+    }
     console.log(this.text_search)
   }
 
   
-  
+
 }
-}
+
