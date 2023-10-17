@@ -124,7 +124,7 @@
             
         </ng-container>
         <!-- <tr *ngFor="let info of (search_input ? filteredData : student_details) | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index" class="student-row"> -->
-            <tr *ngFor="let info of (search_input ? filteredData : paginated_data); let i = index" class="student-row">
+            <tr *ngFor="let info of (search_input && text_search.length > 0 ? filteredData : paginated_data); let i = index" class="student-row" >
 
                 <ng-container *ngIf="edit_student_roll == info.roll_no; else viewRow">
                         <td ></td>
@@ -174,7 +174,7 @@
         <!-- Add pagination controls -->
         
           
-        <div id="buttonContainer"></div>
+        <div  id="buttonContainer"></div>
     </form>
     <!-- <div class="pagination-container">
         <pagination-controls (pageChange)="setPage($event)" class="pagination"></pagination-controls>
