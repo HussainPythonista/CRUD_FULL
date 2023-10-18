@@ -311,9 +311,11 @@ export class TestComponent {
     filteredStudentDetails:Student[] = []
     ngOnInit(){
       
-      this.get_student()
-      this.handleSearchInput('');
-      this.generateButtons();
+      // this.get_student()
+      // this.handleSearchInput('');
+      if (!this.search_input) {
+    this.generateButtons();
+  }
     }
     filterStudentDetails(searchText: string) {
       searchText = searchText.toLowerCase();
@@ -700,48 +702,43 @@ export class TestComponent {
   handleKeyDown(event: KeyboardEvent) {
     console.log(event.key,event.keyCode)
     console.log("Length of Data",this.student_details.length)
-    
-      console.log("key Pressed",event)
-      this.search_input=true
-      const key_code=event.keyCode
-      const isLetter=this.lettersOnly(event.keyCode)
-      if (isLetter==true){
-        this.alpha_search=true
-        this.text_search+=event.key
-        this.handleSearchInput(this.text_search)
+    console.log(this.search_input)
+    console.log("key Pressed",event)
+    this.search_input=true
+    const key_code=event.keyCode
+    const isLetter=this.lettersOnly(event.keyCode)
+    if (isLetter==true){
+      this.alpha_search=true
+      this.text_search+=event.key
+      this.handleSearchInput(this.text_search)
+    }
+    else{
+      if (key_code==8 && this.text_search.length>0){
+        this.text_search=this.text_search.slice(0, -1)
+        if (this.alpha_search==true){this.handleSearchInput(this.text_search)}
+        if (this.alpha_search==false){this.numerical(this.text_search)}
       }
+  
       else{
-        if (key_code==8 && this.text_search.length>0){
-          this.text_search=this.text_search.slice(0, -1)
-          if (this.alpha_search==true){this.handleSearchInput(this.text_search)}
-          if (this.alpha_search==false){this.numerical(this.text_search)}
-        }
-    
-        else{
-          if (key_code>=48 && key_code<=57){
-          this.text_search+=event.key
-          this.alpha_search==false
-          this.numerical(this.text_search)
-        }
-        }
+        if (key_code>=48 && key_code<=57){
+        this.text_search+=event.key
+        this.alpha_search==false
+        this.numerical(this.text_search)
       }
+      }
+    }
     
   }
   
   paginated_data:Student[]=[]
   button_number:any=[]
   generateButtons() {
+    
     const dataSize=this.student_details.length
     const numButtons = Math.ceil(dataSize / 4);
-    
-    
-
     console.log(this.button_number)
     
     const buttonContainer = document.getElementById("buttonContainer");
-
-
-
     if (buttonContainer) {
       buttonContainer.innerHTML = "";
 
@@ -752,25 +749,23 @@ export class TestComponent {
         button.addEventListener("click", () => {
           // Handle button click here
           console.log("Button clicked:", page_number); // Log the button number
-          if (this.search_input==false){
+          
             const step=5
             const start_number=(page_number-1)*5
             const end_number=start_number+step
             this.paginated_data=this.student_details.slice(start_number,end_number)
-          }
          
         });
+       
         buttonContainer.appendChild(button);
         if (page_number === 1) {
           // Trigger a click event on button 1
           button.click();
         }
-        if (this.searchText.length==0){
-          console.log("Succes",this.searchText.length)
-          button.click()
-        }
+       
       }
     }
+    
   }
 }
 
