@@ -339,3 +339,17 @@ header{
   border-radius: 10px;
   height: 40px;
 }
+
+.pagitation{
+  font-family: Arial, sans-serif;
+  background-color: wheat;
+  padding-left: 40%;
+  padding-top: 1%;
+}
+
+.pagitation_container button{
+    color: #007bff;
+}
+button{
+  border: #007bff 2px solid;
+}

@@ -313,19 +313,15 @@ export class TestComponent {
       
       // this.get_student()
       // this.handleSearchInput('');
-      if (!this.search_input) {
-    this.generateButtons();
-  }
-    }
-    filterStudentDetails(searchText: string) {
-      searchText = searchText.toLowerCase();
-      this.filteredStudentDetails = this.student_details.filter(
-        student => 
-          student.roll_no.toString().includes(searchText) ||
-          student.name.toLowerCase().includes(searchText)
-      );
+      if (this.text_search.length==0){
+        this.generateButtons()
+      }
       
+     
+      
+      //this.removeButtons()
     }
+   
     add_student:boolean=false
     edit_student_roll: number |null=null;
     info_pass_template:any;
@@ -651,6 +647,42 @@ export class TestComponent {
     
   filteredData: Student[] = [];
   search_input=false
+  removeButtons(){
+    console.log("remove button triggerd")
+    const dataSize=this.student_details.length
+    const numButtons = Math.ceil(dataSize / 4);
+    console.log(this.button_number)
+    
+    const buttonContainer = document.getElementById("buttonContainer");
+    if (buttonContainer) {
+      buttonContainer.innerHTML = "";
+
+      for (let page_number = 1; page_number < numButtons-1; page_number++) {
+        const button = document.createElement("button");
+        // // page_number=page_number+1
+        button.textContent = page_number.toString();
+        button.addEventListener("click", () => {
+          // Handle button click here
+          console.log("Button clicked:", page_number); // Log the button number
+          
+            const step=5
+            const start_number=(page_number-1)*5
+            const end_number=start_number+step
+            //this.paginated_data=this.student_details.slice(start_number,end_number)
+         
+        });
+        buttonContainer.removeChild(button);
+      }
+    }
+    
+  
+  }
+  trigger_remove_button(){
+    if (this.search_input==true){
+      this.removeButtons()
+    }
+    
+  }
   lettersOnly(keyCode:any){
     const charCode=keyCode
     if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123)  || charCode==32)
@@ -666,6 +698,7 @@ export class TestComponent {
       item.roll_no.toString().includes(txt)
     );
   }
+  
     // console.log(this.student_details,"Student details")
     // console.log(this.filteredData,"Filterd")
     
@@ -680,8 +713,8 @@ export class TestComponent {
     );
     
   }
-    
-    
+  
+  
   }
   text_search=""
   name_search(key_code:any,event:any){
@@ -699,11 +732,14 @@ export class TestComponent {
       
   }
   alpha_search:boolean=false
+  remove_button:boolean=false
   handleKeyDown(event: KeyboardEvent) {
-    console.log(event.key,event.keyCode)
-    console.log("Length of Data",this.student_details.length)
-    console.log(this.search_input)
-    console.log("key Pressed",event)
+    console.log(this.text_search.length==0)
+    // console.log(event.key,event.keyCode)
+    // console.log("Length of Data",this.student_details.length)
+    // console.log(this.search_input)
+    // console.log("key Pressed",event)
+    this.remove_button=true
     this.search_input=true
     const key_code=event.keyCode
     const isLetter=this.lettersOnly(event.keyCode)
@@ -711,11 +747,15 @@ export class TestComponent {
       this.alpha_search=true
       this.text_search+=event.key
       this.handleSearchInput(this.text_search)
+      
     }
     else{
       if (key_code==8 && this.text_search.length>0){
         this.text_search=this.text_search.slice(0, -1)
-        if (this.alpha_search==true){this.handleSearchInput(this.text_search)}
+        if (this.alpha_search==true){
+          this.handleSearchInput(this.text_search)
+        
+        }
         if (this.alpha_search==false){this.numerical(this.text_search)}
       }
   
@@ -726,10 +766,15 @@ export class TestComponent {
         this.numerical(this.text_search)
       }
       }
+      
     }
-    
+    this.remove_div_button()
+    if (this.text_search.length==0){
+      this.add_div_button()
+    }
   }
   
+  // buttonContainer = document.getElementById("buttonContainer");
   paginated_data:Student[]=[]
   button_number:any=[]
   generateButtons() {
@@ -750,14 +795,18 @@ export class TestComponent {
           // Handle button click here
           console.log("Button clicked:", page_number); // Log the button number
           
-            const step=5
-            const start_number=(page_number-1)*5
-            const end_number=start_number+step
-            this.paginated_data=this.student_details.slice(start_number,end_number)
+          const step=5
+          const start_number=(page_number-1)*5
+          const end_number=start_number+step
+          this.paginated_data=this.student_details.slice(start_number,end_number)
          
         });
-       
         buttonContainer.appendChild(button);
+
+        // if (this.search_input==true){
+        //   console.log("This is shit is awesome")
+        //   buttonContainer.removeChild(button);
+        // }
         if (page_number === 1) {
           // Trigger a click event on button 1
           button.click();
@@ -767,5 +816,21 @@ export class TestComponent {
     }
     
   }
+
+  remove_div_button(){
+    const buttonContainer = document.getElementById("buttonContainer");
+    buttonContainer?.remove()
+  }
+ 
+  add_div_button(){
+    const page_container=document.getElementById("pagitation_container")
+    const buttonContainer = document.createElement("div");
+    buttonContainer.id = "buttonContainer";
+    buttonContainer.className="pagitation";
+    page_container?.appendChild(buttonContainer)
+    console.log("document created",buttonContainer)
+    this.generateButtons()
+  }
+  
 }
 
