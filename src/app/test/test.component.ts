@@ -493,7 +493,7 @@ export class TestComponent {
             this.filteredData=this.filteredData.sort((a,b)=>b.roll_no-a.roll_no)
           }
           else{
-            this.student_details=this.student_details.sort((a,b)=>b.roll_no-a.roll_no)
+            this.paginated_data=this.paginated_data.sort((a,b)=>b.roll_no-a.roll_no)
             console.log("roll_no is clicked",type)
           }
         }
@@ -501,7 +501,7 @@ export class TestComponent {
           if (this.search_input==true){
             this.filteredData=this.filteredData.sort((a,b)=>a.roll_no-b.roll_no)
           }
-          else{this.student_details=this.student_details.sort((a,b)=>a.roll_no-b.roll_no)
+          else{this.paginated_data=this.paginated_data.sort((a,b)=>a.roll_no-b.roll_no)
                 console.log("roll_no is clicked",type)
               }
             }
@@ -569,17 +569,18 @@ export class TestComponent {
             this.filteredData=this.filteredData.sort((a,b)=>b.class_teacher.localeCompare(a.class_teacher))
           }
           else{
-            this.student_details=this.student_details.sort((a,b)=>b.class_teacher.localeCompare(a.class_teacher))
+            this.paginated_data=this.paginated_data.sort((a,b)=>b.class_teacher.localeCompare(a.class_teacher))
             console.log("section is clicked",type)
           }
           
         }
         else if (type==false){
           if (this.search_input==true){
-            this.student_details=this.student_details.sort((a,b)=>a.class_teacher.localeCompare(b.class_teacher))
+            this.filteredData=this.filteredData.sort((a,b)=>a.class_teacher.localeCompare(b.class_teacher))
             console.log("section is clicked",type)
           }
-
+          this.paginated_data=this.paginated_data.sort((a,b)=>a.class_teacher.localeCompare(b.section))
+          console.log("section is clicked",type)
           
         }
         }
@@ -782,6 +783,7 @@ export class TestComponent {
     const dataSize=this.student_details.length
     const numButtons = Math.ceil(dataSize / 4);
     console.log(this.button_number)
+
     
     const buttonContainer = document.getElementById("buttonContainer");
     if (buttonContainer) {
@@ -789,6 +791,9 @@ export class TestComponent {
 
       for (let page_number = 1; page_number < numButtons-1; page_number++) {
         const button = document.createElement("button");
+        button.style.borderRadius = "30%";
+        button.style.background="rgb(103, 70, 70)"
+        button.style.color="white"
         // // page_number=page_number+1
         button.textContent = page_number.toString();
         button.addEventListener("click", () => {
@@ -826,9 +831,9 @@ export class TestComponent {
     const page_container=document.getElementById("pagitation_container")
     const buttonContainer = document.createElement("div");
     buttonContainer.id = "buttonContainer";
-    buttonContainer.className="pagitation";
+    buttonContainer.classList.add("pagitation");
     page_container?.appendChild(buttonContainer)
-    console.log("document created",buttonContainer)
+    //console.log("document created",buttonContainer)
     this.generateButtons()
   }
   

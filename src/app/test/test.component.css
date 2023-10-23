@@ -99,17 +99,6 @@ input[type="number"]:focus, input[type="text"]:focus {
     
   }
   
-  /* Button hover effect */
-  .btn:hover {
-     /* Change background color on hover */
-  }
-  .save-btn{
-    /* background-color: black; */
-  }
-  #dummy{
-    
-    padding-left: 20%;
-  }
   /* Center the button */
   .center-button {
     text-align: center;
@@ -296,7 +285,7 @@ header{
 .header-info{
    font-family: 'Comfortaa', sans-serif;
    font-weight: bold;
-   margin-left: 35% ;
+   margin-left: 40% ;
    color: black;
    
 }
@@ -340,16 +329,19 @@ header{
   height: 40px;
 }
 
-.pagitation{
-  font-family: Arial, sans-serif;
-  background-color: wheat;
-  padding-left: 40%;
-  padding-top: 1%;
-}
 
-.pagitation_container button{
-    color: #007bff;
+
+.pagitation {
+  
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
 }
-button{
-  border: #007bff 2px solid;
+#pagitation_container{
+  background: wheat;
+  padding-left: 40%;
+  
+}
+#pagitation_container button{
+  border: 2px solid rgb(103, 70, 70);
 }
